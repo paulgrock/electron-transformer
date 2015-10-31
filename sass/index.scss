@@ -1,0 +1,38 @@
+html,
+body {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: -apple-system, 'Helvetica Neue', Helvetica, sans-serif;
+	background: black;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+main {
+	display: flex;
+	flex: 1 1 auto;
+}
+
+.fileContainer {
+	flex: 2 1 auto;
+	background: white;
+}
+
+header {
+	text-align: center;
+	color: white;
+}
+
+header h1 {
+	font-size: 60px;
+	font-weight: 100;
+	margin: 0;
+	padding: 0;
+}
