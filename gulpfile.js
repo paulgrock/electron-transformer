@@ -1,10 +1,8 @@
 require('gulp-task-loader')('tasks');
 var gulp = require('gulp');
+var babelWatch = require('./tasks/babel')
 
 gulp.task('watch', function() {
 	gulp.watch('sass/**/*.scss', ['sass']);
-	gulp.watch([
-		'client/**/*.js',
-		'client/**/*.jsx'
-	], ['babel']);
+	babelWatch(true);
 })

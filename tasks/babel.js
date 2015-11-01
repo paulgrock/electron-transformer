@@ -4,9 +4,10 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var watchify = require('watchify');
 var file = 'index.js';
+var firstTime = true;
 
 var handleErrors = function(err) {
-	console.log(err);
+	console.error(err);
 };
 
 var compile = function(watch) {
@@ -24,6 +25,11 @@ var compile = function(watch) {
     var stream = bundler.bundle();
     return stream
       .on('error', handleErrors)
+			.on('end', function() {
+				if (!firstTime) {
+					console.timeEnd('Browserify Update')
+				}
+			})
       .pipe(source('build.js'))
       .pipe(gulp.dest('./dist/'));
   }
@@ -31,7 +37,8 @@ var compile = function(watch) {
   // listen for an update and run rebundle
   bundler.on('update', function() {
     rebundle();
-    // gutil.log('Rebundle...');
+		firstTime = false;
+		console.time('Browserify Update');
   });
 	return rebundle();
 };
