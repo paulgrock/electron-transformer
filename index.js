@@ -1,11 +1,11 @@
 'use strict';
+require("babel-core/register");
+
+
 const app = require('app');
 const BrowserWindow = require('browser-window');
 const ipc = require('ipc');
 const fs = require('fs');
-const path = require('path');
-
-require("babel-core/register");
 
 // report crashes to the Electron project
 require('crash-reporter').start();
@@ -34,10 +34,15 @@ function createMainWindow() {
 	return win;
 }
 
-ipc.on('asynchronous-message', function(event, filePath) {
-	let fileName = path.basename(filePath, path.extname(filePath));
-	console.log(fileName);
-  event.sender.send('asynchronous-reply', fileName);
+ipc.on('write-files', function(event, files) {
+	files.forEach(function(file) {
+		fs.rename(file.oldFilePath, file.newFilePath, function(err) {
+			if (err) {
+			  event.sender.send('error', err);
+				return console.error(err);
+			}
+		});
+	})
 });
 
 app.on('window-all-closed', () => {
