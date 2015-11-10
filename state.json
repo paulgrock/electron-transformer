@@ -1,0 +1,30 @@
+/* state */
+
+{
+  "files": [
+    {
+      "path": "/users/pg/Desktop/",
+      "originalFile": "Something Something something",
+      "transformedFile": "something-something-something"
+    },
+    {
+      "path": "/users/pg/Desktop/",
+      "originalFile": "index_bar.html",
+      "transformedFile": "index-bar.html"
+    }
+  ],
+  "transforms": [
+    {
+      "style": "slugify",
+      "variations": []
+    },
+    {
+      "style": "remove-characters",
+      "variations": ["from-end|beginning", "count"]
+    },
+    {
+      "style": "change-case",
+      "variations": ["upper|lower"]
+    }
+  ]
+}

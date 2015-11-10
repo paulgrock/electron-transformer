@@ -3,24 +3,19 @@ import React from 'react';
 import path from 'path';
 import File from './file.jsx';
 
-var renameFile = function(file) {
-	var filePath = path.dirname(file.path);
-	var extension = path.extname(file.name);
-	var fileName = path.basename(file.name, extension);
-	var newFileName = `${fileName}2${extension}`;
-	var newFilePath = path.join(filePath, newFileName);
-	return {
-		oldFileName: file.name,
-		oldFilePath: file.path,
-		newFileName: newFileName,
-		newFilePath: newFilePath
-	}
-}
-
 export default React.createClass({
-	getInitialState() {
+	renameFile: function(file) {
+		console.log(this.props.transforms);
+		var filePath = path.dirname(file.path);
+		var extension = path.extname(file.name);
+		var fileName = path.basename(file.name, extension);
+		var updatedFileName = `${fileName}2${extension}`;
+		var updatedFilePath = path.join(filePath, updatedFileName);
 		return {
-			files: []
+			originalFileName: file.name,
+			originalFilePath: file.path,
+			updatedFileName: updatedFileName,
+			updatedFilePath: updatedFilePath
 		}
 	},
 	handleClick: function(e) {
@@ -29,19 +24,13 @@ export default React.createClass({
 	},
 	handleDrop: function(e) {
 		e.preventDefault();
-		let files = Array.from(e.dataTransfer.files).map(function(file) {
-			return {
-				name: file.name,
-				path: file.path
-			}
-		}).map(renameFile);
-		this.setState({
-			files: files
-		})
+		Array.from(e.dataTransfer.files).
+			map(this.renameFile).
+			forEach(this.props.onFileDrop);
 	},
 	render() {
-		let ListOfFiles = this.state.files.map((file)=> {
-			return <File file={file} key={file.oldFileName} />
+		let ListOfFiles = this.props.files.map((file)=> {
+			return <File file={file} key={file.originalFileName} />
 		});
 
 		return (
@@ -59,6 +48,7 @@ export default React.createClass({
 					</tbody>
 				</table>
 				<button onClick={this.handleClick}>Change</button>
+			<button onClick={this.props.onClearClick}>Clear</button>
 			</div>
 		)
 	}

@@ -5,8 +5,8 @@ export default React.createClass({
 		var file = this.props.file;
 		return (
 			<tr>
-				<td>{file.oldFileName}</td>
-				<td>{file.newFileName}</td>
+				<td>{file.originalFileName}</td>
+				<td>{file.updatedFileName}</td>
 			</tr>
 		)
 	}
