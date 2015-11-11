@@ -38,7 +38,8 @@
     "react": "^0.14.1",
     "react-dom": "^0.14.1",
     "react-redux": "^4.0.0",
-    "redux": "^3.0.4"
+    "redux": "^3.0.4",
+    "underscore.string": "^3.2.2"
   },
   "devDependencies": {
     "babel-core": "^6.0.14",

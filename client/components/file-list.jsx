@@ -1,21 +1,14 @@
 var ipc = window.require('ipc');
 import React from 'react';
-import path from 'path';
 import File from './file.jsx';
+import transformList from '../transform-list';
 
 export default React.createClass({
-	renameFile: function(file) {
-		console.log(this.props.transforms);
-		var filePath = path.dirname(file.path);
-		var extension = path.extname(file.name);
-		var fileName = path.basename(file.name, extension);
-		var updatedFileName = `${fileName}2${extension}`;
-		var updatedFilePath = path.join(filePath, updatedFileName);
+	formatFileProperties: function(file) {
 		return {
 			originalFileName: file.name,
-			originalFilePath: file.path,
-			updatedFileName: updatedFileName,
-			updatedFilePath: updatedFilePath
+			path: file.path,
+			updatedFileName: file.name
 		}
 	},
 	handleClick: function(e) {
@@ -25,7 +18,7 @@ export default React.createClass({
 	handleDrop: function(e) {
 		e.preventDefault();
 		Array.from(e.dataTransfer.files).
-			map(this.renameFile).
+			map(this.formatFileProperties).
 			forEach(this.props.onFileDrop);
 	},
 	render() {
@@ -48,7 +41,7 @@ export default React.createClass({
 					</tbody>
 				</table>
 				<button onClick={this.handleClick}>Change</button>
-			<button onClick={this.props.onClearClick}>Clear</button>
+				<button onClick={this.props.onClearClick}>Clear</button>
 			</div>
 		)
 	}

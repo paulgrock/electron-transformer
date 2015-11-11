@@ -4,8 +4,7 @@ export default function(file) {
 	return {
 		type: ADD_FILE,
 		originalFileName: file.originalFileName,
-		originalFilePath: file.originalFilePath,
-		updatedFileName: file.updatedFileName,
-		updatedFilePath: file.updatedFilePath
+		path: file.path,
+		updatedFileName: file.updatedFileName
 	}
 }

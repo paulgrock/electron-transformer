@@ -1,4 +1,6 @@
 import * as types from './actions/types';
+import renameFile from './rename-file';
+
 const initialState = {
 	files: [],
 	transforms: []
@@ -12,9 +14,8 @@ const tranformerApp = function(state = initialState, action) {
 					...state.files,
 					{
 						originalFileName: action.originalFileName,
-						originalFilePath: action.originalFilePath,
-						updatedFileName: action.updatedFileName,
-						updatedFilePath: action.updatedFilePath
+						path: action.path,
+						updatedFileName: action.updatedFileName
 					}
 				]
 			})
@@ -49,6 +50,16 @@ const tranformerApp = function(state = initialState, action) {
 					}
 				]
 			})
+
+		case types.RENAME_FILES:
+			let updatedFiles = state.files.map((file)=> {
+				console.log(file);
+				return renameFile(file, state.transforms);
+			});
+			return Object.assign({}, state, {
+				files: updatedFiles
+			});
+
 		case types.CLEAR_FILES:
 			return Object.assign({}, state, {files: []});
 		default:

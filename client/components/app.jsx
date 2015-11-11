@@ -9,28 +9,27 @@ import addTransform from '../actions/add-transform';
 import changeTransform from '../actions/change-transform';
 import removeTransform from '../actions/remove-transform';
 import clearFiles from '../actions/clear-files';
+import renameFiles from '../actions/rename-files'
 
 ipc.on('error', (err)=> {
 	console.error(err);
 });
 
 const App = React.createClass({
+
 	render() {
 		const {dispatch, files, transforms} = this.props;
 		return (
 			<div className="container">
-				<FileList onFileDrop={files=> dispatch(addFile(files))} files={files} onClearClick={()=> dispatch(clearFiles())} transforms={transforms} />
-			<Transforms transforms={transforms} onAddTransform={()=> dispatch(addTransform())} onChangeTransform={(transform)=> dispatch(changeTransform(transform))} />
+				<FileList onFileDrop={files=> dispatch(addFile(files))} files={files} onClearClick={()=> dispatch(clearFiles())} />
+			<Transforms transforms={transforms} onAddTransform={()=> { dispatch(addTransform()); dispatch(renameFiles());}} onChangeTransform={(transform)=> {dispatch(changeTransform(transform));  dispatch(renameFiles());}} />
 			</div>
 		)
 	}
 })
 
 const select = (state)=> {
-	return {
-	  files: state.files,
-		transforms: state.transforms
-	}
+	return state
 }
 
 export default connect(select)(App);
