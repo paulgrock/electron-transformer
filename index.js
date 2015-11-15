@@ -6,6 +6,7 @@ const app = require('app');
 const BrowserWindow = require('browser-window');
 const ipc = require('ipc');
 const fs = require('fs');
+const path = require('path');
 
 // report crashes to the Electron project
 require('crash-reporter').start();
@@ -36,7 +37,9 @@ function createMainWindow() {
 
 ipc.on('write-files', function(event, files) {
 	files.forEach(function(file) {
-		fs.rename(file.oldFilePath, file.newFilePath, function(err) {
+		const completeOldPath = path.join(file.path, file.originalFileName);
+		const completeNewPath = path.join(file.path, file.updatedFileName);
+		fs.rename(completeOldPath, completeNewPath, function(err) {
 			if (err) {
 			  event.sender.send('error', err);
 				return console.error(err);

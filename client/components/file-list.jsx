@@ -13,7 +13,7 @@ export default React.createClass({
 	},
 	handleClick: function(e) {
 		e.preventDefault();
-		ipc.send('write-files', this.state.files);
+		ipc.send('write-files', this.props.files);
 	},
 	handleDrop: function(e) {
 		e.preventDefault();
