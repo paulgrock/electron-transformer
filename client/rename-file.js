@@ -7,8 +7,6 @@ const renameFile = (file, transforms)=> {
 	var transformedFileName = transforms.reduce(function(file, transform) {
 		return transformList[transform.style].method(file);
 	}, originalFileNameWithoutExt);
-
-	console.log(file);
 	return {
 		originalFileName: file.originalFileName,
 		path: file.path,
