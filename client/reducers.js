@@ -25,7 +25,7 @@ const tranformerApp = function(state = initialState, action) {
 					...state.transforms,
 					{
 						style: action.style,
-						variations: action.variations
+						args: action.args
 					}
 				]
 			})
@@ -35,7 +35,7 @@ const tranformerApp = function(state = initialState, action) {
 					...state.transforms.slice(0, action.position),
 					{
 						style: action.style,
-						variations: action.variations
+						args: action.args
 					},
 					...state.transforms.slice(action.position + 1)
 				]

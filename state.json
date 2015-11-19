@@ -16,15 +16,15 @@
   "transforms": [
     {
       "style": "slugify",
-      "variations": []
+      "args": []
     },
     {
       "style": "remove-characters",
-      "variations": ["from-end|beginning", "count"]
+      "args": ["from-end|beginning", "count"]
     },
     {
       "style": "change-case",
-      "variations": ["upper|lower"]
+      "args": ["upper|lower"]
     }
   ]
 }

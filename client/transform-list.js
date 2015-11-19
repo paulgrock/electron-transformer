@@ -1,22 +1,33 @@
 import slugify from 'underscore.string/slugify';
 
 const transformList = {
-	slugify: {
+	"slugify": {
 		name: "Slugify",
-		method: function(name) {
-			return slugify(name);
+		method: function(str) {
+			return slugify(str);
 		}
 	},
 	"upper-case": {
 		name: "Upper Case",
-		method: function(name) {
-			return name.toUpperCase();
+		method: function(str) {
+			return str.toUpperCase();
 		}
 	},
 	"lower-case": {
 		name: "Lower Case",
-		method: function(name) {
-			return name.toLowerCase();
+		method: function(str) {
+			return str.toLowerCase();
+		}
+	},
+	"remove-characters": {
+		name: "Remove Characters",
+		method: function(str, args) {
+			var strArray = str.split('');
+			if (args.from === "start") {
+				return str.slice(args.amount);
+			}
+			strArray.length = strArray.length - args.amount;
+			return strArray.join('')
 		}
 	}
 };
