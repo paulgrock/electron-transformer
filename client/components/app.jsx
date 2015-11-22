@@ -16,13 +16,24 @@ ipc.on('error', (err)=> {
 });
 
 const App = React.createClass({
-
+	handleAddFile(dispatch, files) {
+		dispatch(addFile(files));
+		dispatch(renameFiles());
+	},
+	handleAddTransform(dispatch) {
+		dispatch(addTransform());
+		dispatch(renameFiles());
+	},
+	handleChangeTransform(dispatch, transform) {
+		dispatch(changeTransform(transform));
+		dispatch(renameFiles());
+	},
 	render() {
 		const {dispatch, files, transforms} = this.props;
 		return (
 			<div className="container">
-				<FileList onFileDrop={files=> dispatch(addFile(files))} files={files} onClearClick={()=> dispatch(clearFiles())} />
-			<Transforms transforms={transforms} onAddTransform={()=> { dispatch(addTransform()); dispatch(renameFiles());}} onChangeTransform={(transform)=> {dispatch(changeTransform(transform));  dispatch(renameFiles());}} />
+				<FileList onFileDrop={files=> this.handleAddFile(dispatch, files)} files={files} onClearClick={()=> dispatch(clearFiles())} />
+			<Transforms transforms={transforms} onAddTransform={()=> {this.handleAddTransform(dispatch)}} onChangeTransform={(transform)=> {this.handleChangeTransform(dispatch, transform)}} />
 			</div>
 		)
 	}
