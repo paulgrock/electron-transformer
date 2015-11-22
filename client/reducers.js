@@ -53,7 +53,6 @@ const tranformerApp = function(state = initialState, action) {
 
 		case types.RENAME_FILES:
 			let updatedFiles = state.files.map((file)=> {
-				console.log(file);
 				return renameFile(file, state.transforms);
 			});
 			return Object.assign({}, state, {

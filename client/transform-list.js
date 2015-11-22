@@ -23,12 +23,33 @@ const transformList = {
 		name: "Remove Characters",
 		method: function(str, args) {
 			var strArray = str.split('');
-			if (args.from === "start") {
+			if (args.from === 'start') {
 				return str.slice(args.amount);
 			}
 			strArray.length = strArray.length - args.amount;
 			return strArray.join('')
-		}
+		},
+		options: [
+			{
+				type: 'select',
+				name: 'from',
+				options: [
+					{
+						name: 'Start',
+						slug: 'start'
+					},
+					{
+						name: 'End',
+						slug: 'end'
+					}
+				]
+			},
+			{
+				type: 'input',
+				name: 'amount',
+				style: 'number'
+			}
+		]
 	}
 };
 

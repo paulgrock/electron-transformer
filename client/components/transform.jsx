@@ -1,20 +1,32 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import TransformOptionInput from './transform-option-input.jsx'
+import TransformOptionSelect from './transform-option-select.jsx'
 import transformList from '../transform-list';
 
 export default React.createClass({
+	getInitialState() {
+		return {
+			selectedTransform: null
+		}
+	},
 	handleChange(e) {
 		var transformTypeEl = this.refs["transform-type"];
-		var els = Object.keys(this.refs).
+		var els = [...this.refs["transform-form"].querySelectorAll("[name]")].
 			filter((el) => {
 				if (el !== "transform-type") {
 					return true;
 				}
 			}).
 			reduce((prev, curr)=> {
-				prev[curr] = this.refs[curr].value;
+				prev[curr.name] = curr.value;
 				return prev;
 			}, {});
+
+		this.setState({
+			selectedTransform: transformTypeEl.value
+		});
+
+		// Position is basically id
 		this.props.onChangeTransform({
 			position: this.props.position,
 			style: transformTypeEl.value,
@@ -22,6 +34,9 @@ export default React.createClass({
 		})
 	},
 	render() {
+		let AdditionalTransformOptions;
+		let AdditionalTransformOptionsList;
+		let selectedTransform = transformList[this.state.selectedTransform];
 		let TransformOption = Object.keys(transformList).
 			map(function(key) {
 				return (
@@ -29,17 +44,30 @@ export default React.createClass({
 				)
 			})
 
+		if (selectedTransform && selectedTransform.options != null) {
+			AdditionalTransformOptionsList = selectedTransform.options.map(function(transformOption) {
+				if (transformOption.type === 'select') {
+					return <TransformOptionSelect option={transformOption} ref="transform-option-select" />
+				}
+				if (transformOption.type === 'input') {
+					return <TransformOptionInput option={transformOption} />
+				}
+			})
+
+			AdditionalTransformOptions =(
+				<div>
+					{AdditionalTransformOptionsList}
+				</div>
+			)
+		}
+
 		return (
 			<li>
-				<form onChange={this.handleChange}>
+				<form onChange={this.handleChange} ref="transform-form">
 					<select name="transform-type" ref="transform-type">
 						{TransformOption}
 					</select>
-					<select name="from" ref="from">
-						<option value="start">Start</option>
-						<option value="end">end</option>
-					</select>
-					<input type="number" name="amount" ref="amount" />
+					{AdditionalTransformOptions}
 				</form>
 			</li>
 		)
