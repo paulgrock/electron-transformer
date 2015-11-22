@@ -10,7 +10,7 @@ export default React.createClass({
 		var transformList = this.props.transforms.map((transform, idx)=> <Transform key={idx} onChangeTransform={this.props.onChangeTransform} onRemoveTransform={this.props.onRemoveTransform} index={idx} /> )
 		return (
 			<aside className="fileTransforms">
-				<h3>Transformers</h3>
+				<h3>Transforms</h3>
 				<ul>
 					{transformList}
 				</ul>

@@ -27,7 +27,7 @@ export default React.createClass({
 
 		return (
 			<div className="fileContainer" onDrop={this.handleDrop}>
-				<h1>Component</h1>
+				<h1>File List</h1>
 				<table>
 					<thead>
 						<tr>
