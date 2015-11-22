@@ -16,12 +16,19 @@ ipc.on('error', (err)=> {
 });
 
 const App = React.createClass({
-	handleAddFile(dispatch, files) {
-		dispatch(addFile(files));
+	handleAddFiles(dispatch, files) {
+		dispatch(clearFiles());
+		files.forEach((file)=> {
+			dispatch(addFile(file));
+		})
 		dispatch(renameFiles());
 	},
 	handleAddTransform(dispatch) {
 		dispatch(addTransform());
+		dispatch(renameFiles());
+	},
+	handleRemoveTransform(dispatch, index) {
+		dispatch(removeTransform(index));
 		dispatch(renameFiles());
 	},
 	handleChangeTransform(dispatch, transform) {
@@ -32,8 +39,11 @@ const App = React.createClass({
 		const {dispatch, files, transforms} = this.props;
 		return (
 			<div className="container">
-				<FileList onFileDrop={files=> this.handleAddFile(dispatch, files)} files={files} onClearClick={()=> dispatch(clearFiles())} />
-			<Transforms transforms={transforms} onAddTransform={()=> {this.handleAddTransform(dispatch)}} onChangeTransform={(transform)=> {this.handleChangeTransform(dispatch, transform)}} />
+				<FileList onFileDrop={(files)=> this.handleAddFiles(dispatch, files)} files={files} onClearClick={()=> dispatch(clearFiles())} />
+				<Transforms transforms={transforms}
+					onAddTransform={()=> {this.handleAddTransform(dispatch)}}
+					onChangeTransform={(transform)=> {this.handleChangeTransform(dispatch, transform)}}
+					onRemoveTransform={(idx)=> this.handleRemoveTransform(dispatch, idx)}/>
 			</div>
 		)
 	}

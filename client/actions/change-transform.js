@@ -2,7 +2,7 @@ import { CHANGE_TRANSFORM } from './types';
 
 export default (transform) => ({
 	type: CHANGE_TRANSFORM,
-	position: transform.position,
+	index: transform.index,
 	style: transform.style,
 	args: transform.args
 })

@@ -11,7 +11,8 @@ export default React.createClass({
 	},
 	handleChange(e) {
 		var transformTypeEl = this.refs["transform-type"];
-		var els = [...this.refs["transform-form"].querySelectorAll("[name]")].
+		const formElementsNodeList = this.refs["transform-form"].querySelectorAll("[name]");
+		var els = [...formElementsNodeList].
 			reduce((prev, curr)=> {
 				prev[curr.name] = curr.value;
 				return prev;
@@ -21,23 +22,25 @@ export default React.createClass({
 			selectedTransform: transformTypeEl.value
 		});
 
-		// Position is basically id
 		this.props.onChangeTransform({
-			position: this.props.position,
+			index: this.props.index,
 			style: transformTypeEl.value,
 			args: els
 		})
 	},
+	handleRemove(idx) {
+		this.props.onRemoveTransform(idx)
+	},
 	render() {
 		let AdditionalTransformOptions;
 		let AdditionalTransformOptionsList;
+		const transformListArray = Object.keys(transformList);
 		let selectedTransform = transformList[this.state.selectedTransform];
-		let TransformOption = Object.keys(transformList).
-			map(function(key) {
-				return (
-					<option value={key}>{transformList[key].name}</option>
-				)
-			})
+		let TransformOption = transformListArray.map(function(key) {
+			return (
+				<option value={key}>{transformList[key].name}</option>
+			)
+		})
 
 		if (selectedTransform && selectedTransform.options != null) {
 			AdditionalTransformOptionsList = selectedTransform.options.map(function(transformOption) {
@@ -64,6 +67,7 @@ export default React.createClass({
 					</select>
 					{AdditionalTransformOptions}
 				</form>
+				<button onClick={this.handleRemove.bind(this, this.props.index)}>delete</button>
 			</li>
 		)
 	}

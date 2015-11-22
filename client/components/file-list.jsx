@@ -17,9 +17,8 @@ export default React.createClass({
 	},
 	handleDrop: function(e) {
 		e.preventDefault();
-		Array.from(e.dataTransfer.files).
-			map(this.formatFileProperties).
-			forEach(this.props.onFileDrop);
+		const fileList = [...e.dataTransfer.files].map(this.formatFileProperties);
+		this.props.onFileDrop(fileList);
 	},
 	render() {
 		let ListOfFiles = this.props.files.map((file)=> {

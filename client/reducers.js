@@ -30,24 +30,23 @@ const tranformerApp = function(state = initialState, action) {
 				]
 			})
 		case types.CHANGE_TRANSFORM:
+			// TODO: Use a  better way of finding
 			return Object.assign({}, state, {
 				transforms: [
-					...state.transforms.slice(0, action.position),
+					...state.transforms.slice(0, action.index),
 					{
 						style: action.style,
 						args: action.args
 					},
-					...state.transforms.slice(action.position + 1)
+					...state.transforms.slice(action.index + 1)
 				]
 			})
 		case types.REMOVE_TRANSFORM:
-			// TODO: Use a  better way of finding
 			return Object.assign({}, state, {
 				transforms: [
-					...state.transforms.slice(0, action.id),
-					{
-						style: action.style
-					}
+					...state.transforms.slice(0, action.index),
+					...state.transforms.slice(action.index + 1)
+
 				]
 			})
 

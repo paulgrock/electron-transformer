@@ -7,7 +7,7 @@ export default React.createClass({
 		this.props.onAddTransform()
 	},
 	render() {
-		var transformList = this.props.transforms.map((transform, idx)=> <Transform key={idx} onChangeTransform={this.props.onChangeTransform} position={idx} /> )
+		var transformList = this.props.transforms.map((transform, idx)=> <Transform key={idx} onChangeTransform={this.props.onChangeTransform} onRemoveTransform={this.props.onRemoveTransform} index={idx} /> )
 		return (
 			<aside className="fileTransforms">
 				<h3>Transformers</h3>
