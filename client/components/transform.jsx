@@ -12,11 +12,6 @@ export default React.createClass({
 	handleChange(e) {
 		var transformTypeEl = this.refs["transform-type"];
 		var els = [...this.refs["transform-form"].querySelectorAll("[name]")].
-			filter((el) => {
-				if (el !== "transform-type") {
-					return true;
-				}
-			}).
 			reduce((prev, curr)=> {
 				prev[curr.name] = curr.value;
 				return prev;

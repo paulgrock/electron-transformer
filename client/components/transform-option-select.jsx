@@ -10,7 +10,7 @@ export default React.createClass({
 		})
 
 		return (
-			<select name={name} ref="from">
+			<select name={name}>
 				{OptionList}
 			</select>
 		);
