@@ -8,6 +8,9 @@ const ipc = require('ipc');
 const fs = require('fs');
 const path = require('path');
 const Menu = require('menu');
+var dialog = require('dialog');
+
+
 
 // report crashes to the Electron project
 require('crash-reporter').start();
@@ -34,6 +37,28 @@ function createMainWindow() {
 	win.on('closed', onClosed);
 
 	var template = [
+		{
+			label: 'File',
+			submenu: [
+				{
+					label: 'Open',
+					accelerator: 'CmdOrCtrl+O',
+					click: function() {
+						// TODO: add , 'openDirectory' to properties when directory support is in
+						const options = {
+							title: 'Add files to be transmformed',
+					    properties: ['openFile', 'multiSelections', 'createDirectory']
+						};
+						dialog.showOpenDialog(win, options, function(files) {
+							if (files == null) {
+								return;
+							}
+							win.webContents.send('new-files', files);
+						})
+					}
+				}
+			]
+		},
 		{
 			label: 'Edit',
 			submenu: [
@@ -196,6 +221,7 @@ function createMainWindow() {
 }
 
 ipc.on('write-files', function(event, files) {
+	var timesCalled = 0;
 	files.forEach(function(file) {
 		const completeOldPath = path.join(file.path, file.originalFileName);
 		const completeNewPath = path.join(file.path, file.updatedFileName);
@@ -204,8 +230,12 @@ ipc.on('write-files', function(event, files) {
 			  event.sender.send('error', err);
 				return console.error(err);
 			}
+			timesCalled += 1;
+			if (timesCalled === files.length) {
+				event.sender.send('file-write-success', files.length);
+			}
 		});
-	})
+	});
 });
 
 app.on('window-all-closed', () => {

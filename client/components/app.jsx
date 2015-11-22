@@ -10,9 +10,20 @@ import changeTransform from '../actions/change-transform';
 import removeTransform from '../actions/remove-transform';
 import clearFiles from '../actions/clear-files';
 import renameFiles from '../actions/rename-files'
+var remote = window.require('remote');
+var dialog = remote.require('dialog');
 
 ipc.on('error', (err)=> {
 	console.error(err);
+	dialog.showErrorBox('Something went wrong', err);
+});
+
+ipc.on('file-write-success', (fileCount)=> {
+	dialog.showMessageBox({
+		type: 'info',
+		message: 'Wrote ' + fileCount + ' files',
+		buttons: ["OK"]
+	})
 });
 
 const App = React.createClass({
@@ -39,7 +50,7 @@ const App = React.createClass({
 		const {dispatch, files, transforms} = this.props;
 		return (
 			<div className="container">
-				<FileList onFileDrop={(files)=> this.handleAddFiles(dispatch, files)} files={files} onClearClick={()=> dispatch(clearFiles())} />
+				<FileList onAddFiles={(files)=> this.handleAddFiles(dispatch, files)} files={files} onClearClick={()=> dispatch(clearFiles())} />
 				<Transforms transforms={transforms}
 					onAddTransform={()=> {this.handleAddTransform(dispatch)}}
 					onChangeTransform={(transform)=> {this.handleChangeTransform(dispatch, transform)}}
