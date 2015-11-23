@@ -44,10 +44,9 @@ function createMainWindow() {
 					label: 'Open',
 					accelerator: 'CmdOrCtrl+O',
 					click: function() {
-						// TODO: add , 'openDirectory' to properties when directory support is in
 						const options = {
 							title: 'Add files to be transmformed',
-					    properties: ['openFile', 'multiSelections', 'createDirectory']
+					    properties: ['openFile', 'openDirectory', 'multiSelections']
 						};
 						dialog.showOpenDialog(win, options, function(files) {
 							if (files == null) {

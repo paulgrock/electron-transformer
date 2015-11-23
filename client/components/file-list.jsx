@@ -2,29 +2,18 @@ var ipc = window.require('ipc');
 import React from 'react';
 import File from './file.jsx';
 import transformList from '../transform-list';
-import path from 'path';
+import { formatFileProperties, formatFilesFromPath } from '../utils/file-formatter';
 var remote = window.require('remote');
 var dialog = remote.require('dialog');
+import openDialog from '../utils/open-dialog';
 
 export default React.createClass({
 	addFiles: function(files) {
-		var fileList = files.map((file)=> {
-			return this.formatFileProperties({
-				name: path.basename(file),
-				path: file
-			})
-		});
-		this.props.onAddFiles(fileList);
+		var formattedFiles = formatFilesFromPath(files);
+		this.props.onAddFiles(formattedFiles);
 	},
 	componentWillMount: function() {
 		ipc.on('new-files', this.addFiles);
-	},
-	formatFileProperties: function(file) {
-		return {
-			originalFileName: file.name,
-			path: file.path,
-			updatedFileName: file.name
-		}
 	},
 	handleClick(e) {
 		e.preventDefault();
@@ -42,7 +31,7 @@ export default React.createClass({
 	},
 	handleDrop: function(e) {
 		e.preventDefault();
-		const fileList = [...e.dataTransfer.files].map(this.formatFileProperties);
+		const fileList = [...e.dataTransfer.files].map(formatFileProperties);
 		this.props.onAddFiles(fileList);
 	},
 	handleAddFiles() {
@@ -50,12 +39,13 @@ export default React.createClass({
 			title: 'Add files to be transmformed',
 			properties: ['openFile', 'multiSelections', 'createDirectory']
 		};
-		dialog.showOpenDialog(opts, (files)=> {
-			if (files == null) {
-				return;
+
+		openDialog(null, (err, files)=>{
+			if (err) {
+				return console.error(err);
 			}
-			this.addFiles(files);
-		})
+			return this.addFiles(files);
+		});
 	},
 	render() {
 		let ListOfFiles = this.props.files.map((file)=> {

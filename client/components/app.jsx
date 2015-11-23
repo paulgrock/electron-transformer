@@ -12,6 +12,10 @@ import clearFiles from '../actions/clear-files';
 import renameFiles from '../actions/rename-files'
 var remote = window.require('remote');
 var dialog = remote.require('dialog');
+var fs = remote.require('fs');
+var recursive = remote.require('recursive-readdir');
+// import recursive from 'recursive-readdir';
+import { formatFilesFromPath } from '../utils/file-formatter';
 
 ipc.on('error', (err)=> {
 	console.error(err);
@@ -30,7 +34,15 @@ const App = React.createClass({
 	handleAddFiles(dispatch, files) {
 		dispatch(clearFiles());
 		files.forEach((file)=> {
-			dispatch(addFile(file));
+			fs.stat(file.path, function(err, stats) {
+				if (stats.isDirectory()) {
+					recursive(file.path, ['.*'], function(err, files) {
+						formatFilesFromPath(files).forEach((file)=> dispatch(addFile(file)));
+					});
+				} else {
+					dispatch(addFile(file));
+				}
+			});
 		})
 		dispatch(renameFiles());
 	},
