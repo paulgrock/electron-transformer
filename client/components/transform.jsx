@@ -60,14 +60,14 @@ export default React.createClass({
 		}
 
 		return (
-			<li>
+			<li className="list-group-item">
 				<form onChange={this.handleChange} ref="transform-form">
-					<select name="transform-type" ref="transform-type">
+					<select name="transform-type" ref="transform-type" className="form-control">
 						{TransformOption}
 					</select>
 					{AdditionalTransformOptions}
 				</form>
-				<button onClick={this.handleRemove.bind(this, this.props.index)}>delete</button>
+				<button onClick={this.handleRemove.bind(this, this.props.index)}><span className="icon icon-minus"></span></button>
 			</li>
 		)
 	}

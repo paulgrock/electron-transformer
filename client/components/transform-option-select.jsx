@@ -10,9 +10,11 @@ export default React.createClass({
 		})
 
 		return (
-			<select name={name}>
-				{OptionList}
-			</select>
+			<div>
+				<select name={name} className="form-control">
+					{OptionList}
+				</select>
+			</div>
 		);
 	}
 })

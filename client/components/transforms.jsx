@@ -9,12 +9,14 @@ export default React.createClass({
 	render() {
 		var transformList = this.props.transforms.map((transform, idx)=> <Transform key={idx} onChangeTransform={this.props.onChangeTransform} onRemoveTransform={this.props.onRemoveTransform} index={idx} /> )
 		return (
-			<aside className="fileTransforms">
-				<h3>Transforms</h3>
-				<ul>
+			<aside className="pane-sm sidebar">
+				<h3 className="padded-more">Transforms</h3>
+				<ul className="list-group">
 					{transformList}
 				</ul>
-				<button onClick={this.handleAddTransform}>+</button>
+				<div className="padded-more">
+					<button onClick={this.handleAddTransform}>+</button>
+				</div>
 			</aside>
 		)
 	}

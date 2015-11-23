@@ -61,7 +61,7 @@ const App = React.createClass({
 	render() {
 		const {dispatch, files, transforms} = this.props;
 		return (
-			<div className="container">
+			<div className="pane-group">
 				<FileList onAddFiles={(files)=> this.handleAddFiles(dispatch, files)} files={files} onClearClick={()=> dispatch(clearFiles())} />
 				<Transforms transforms={transforms}
 					onAddTransform={()=> {this.handleAddTransform(dispatch)}}

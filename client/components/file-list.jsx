@@ -53,22 +53,26 @@ export default React.createClass({
 		});
 
 		return (
-			<div className="fileContainer" onDrop={this.handleDrop}>
-				<h1>File List</h1>
-				<table>
-					<thead>
-						<tr>
-							<td>Original File Name</td>
-							<td>New File Name</td>
-						</tr>
-					</thead>
-					<tbody>
-						{ListOfFiles}
-					</tbody>
-				</table>
-				<button onClick={this.handleAddFiles}>Add Files</button>
-				<button onClick={this.handleClick}>Change</button>
-				<button onClick={this.props.onClearClick}>Clear</button>
+			<div className="pane" onDrop={this.handleDrop}>
+				<div className="padded-more">
+					<h1>File List</h1>
+					<table className="table-striped">
+						<thead>
+							<tr>
+								<th>Original File Name</th>
+								<th>New File Name</th>
+							</tr>
+						</thead>
+						<tbody>
+							{ListOfFiles}
+						</tbody>
+					</table>
+					<div className="btn-group padded-top-more pull-right">
+						<button onClick={this.handleAddFiles}>Add Files</button>
+						<button onClick={this.handleClick}>Change</button>
+						<button onClick={this.props.onClearClick}>Clear</button>
+					</div>
+				</div>
 			</div>
 		)
 	}

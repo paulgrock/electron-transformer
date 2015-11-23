@@ -10,7 +10,7 @@ export default React.createClass({
 			placeholder = 0;
 		}
 		return (
-			<input type={style} name={name} placeholder={placeholder} />
+			<input type={style} name={name} placeholder={placeholder} className="form-control"/>
 		);
 	}
 });
