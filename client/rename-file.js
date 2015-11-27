@@ -1,5 +1,5 @@
 import path from 'path';
-import transformList from './transform-list';
+import transformList from './transforms/list';
 
 const renameFile = (file, transforms)=> {
 	var extension = path.extname(file.originalFileName);

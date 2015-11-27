@@ -10,8 +10,6 @@ const path = require('path');
 const Menu = require('menu');
 var dialog = require('dialog');
 
-
-
 // report crashes to the Electron project
 require('crash-reporter').start();
 

@@ -11,7 +11,7 @@ export default React.createClass({
 
 		return (
 			<div>
-				<select name={name} className="form-control">
+				<select name={name} className="form-control" onChange={this.props.handleChange}>
 					{OptionList}
 				</select>
 			</div>

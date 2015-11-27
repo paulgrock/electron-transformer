@@ -1,7 +1,7 @@
 import React from 'react';
 import TransformOptionInput from './transform-option-input.jsx'
 import TransformOptionSelect from './transform-option-select.jsx'
-import transformList from '../transform-list';
+import transformList from '../transforms/list';
 
 export default React.createClass({
 	handleChange(e) {
@@ -37,10 +37,10 @@ export default React.createClass({
 		if (selectedTransform && selectedTransform.options != null) {
 			AdditionalTransformOptionsList = selectedTransform.options.map((transformOption) => {
 				if (transformOption.type === 'select') {
-					return <TransformOptionSelect option={transformOption} ref="transform-option-select" />
+					return <TransformOptionSelect option={transformOption} ref="transform-option-select" handleChange={this.handleChange} />
 				}
 				if (transformOption.type === 'input') {
-					return <TransformOptionInput option={transformOption} />
+					return <TransformOptionInput option={transformOption} handleChange={this.handleChange} />
 				}
 			})
 
@@ -53,7 +53,7 @@ export default React.createClass({
 
 		return (
 			<li className="list-group-item">
-				<form onChange={this.handleChange} ref="transform-form">
+				<form ref="transform-form">
 					<select name="transform-type" ref="transform-type" className="form-control" value={transform.style}  onChange={this.handleChange}>
 						{TransformOption}
 					</select>

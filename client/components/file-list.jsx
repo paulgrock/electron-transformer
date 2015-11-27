@@ -1,7 +1,6 @@
 var ipc = window.require('ipc');
 import React from 'react';
 import File from './file.jsx';
-import transformList from '../transform-list';
 import { formatFileProperties, formatFilesFromPath } from '../utils/file-formatter';
 var remote = window.require('remote');
 var dialog = remote.require('dialog');
