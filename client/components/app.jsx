@@ -8,7 +8,6 @@ import addFile from '../actions/add-file';
 import addTransform from '../actions/add-transform';
 import changeTransform from '../actions/change-transform';
 import removeTransform from '../actions/remove-transform';
-import removeTransformAsnyc from '../actions/remove-transform-async';
 import clearFiles from '../actions/clear-files';
 import renameFiles from '../actions/rename-files'
 var remote = window.require('remote');
@@ -53,7 +52,7 @@ const App = React.createClass({
 	},
 	handleRemoveTransform(index) {
 		var self = this;
-		this.props.dispatch(removeTransformAsnyc(index))
+		this.props.dispatch(removeTransform(index))
 		.then(() =>{
 			console.log(self.props.transforms);
 			self.props.dispatch(renameFiles());
