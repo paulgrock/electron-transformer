@@ -1,6 +1,12 @@
 import slugify from 'underscore.string/slugify';
 
 const transformList = {
+	"noop": {
+		name: "Select a transform",
+		method: function(str) {
+			return str;
+		}
+	},
 	"slugify": {
 		name: "Slugify",
 		method: function(str) {
@@ -61,7 +67,7 @@ const transformList = {
 			if (args["additional-characters"] == null) {
 				return str;
 			}
-			
+
 			if (args.from === 'start') {
 				return args["additional-characters"] + str;
 			}
@@ -88,6 +94,33 @@ const transformList = {
 			{
 				type: 'input',
 				name: 'additional-characters',
+				style: 'text'
+			}
+		]
+	},
+	"replace-characters": {
+		name: "Replace",
+		method: function(str, args) {
+			var origStr = args['original-string'];
+			var replacementStr = args['replacement-string'];
+			if (!origStr || !replacementStr) {
+				return str;
+			}
+
+			var matcher = new RegExp(args['original-string'], 'gi')
+
+			return str.replace(matcher, replacementStr);
+
+		},
+		options: [
+			{
+				type: 'input',
+				name: 'original-string',
+				style: 'text'
+			},
+			{
+				type: 'input',
+				name: 'replacement-string',
 				style: 'text'
 			}
 		]

@@ -3,7 +3,11 @@
   "libs": [
     "browser"
   ],
+  "loadEagerly": [
+    "./client/**/*"
+  ],
 	"plugins": {
-		"node": {}
+		"node": {},
+    "es_modules": {}
 	}
 }

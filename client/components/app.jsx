@@ -8,6 +8,7 @@ import addFile from '../actions/add-file';
 import addTransform from '../actions/add-transform';
 import changeTransform from '../actions/change-transform';
 import removeTransform from '../actions/remove-transform';
+import removeTransformAsnyc from '../actions/remove-transform-async';
 import clearFiles from '../actions/clear-files';
 import renameFiles from '../actions/rename-files'
 var remote = window.require('remote');
@@ -31,42 +32,46 @@ ipc.on('file-write-success', (fileCount)=> {
 });
 
 const App = React.createClass({
-	handleAddFiles(dispatch, files) {
-		dispatch(clearFiles());
+	handleAddFiles(files) {
+		this.props.dispatch(clearFiles());
 		files.forEach((file)=> {
-			fs.stat(file.path, function(err, stats) {
+			fs.stat(file.path, (err, stats)=> {
 				if (stats.isDirectory()) {
-					recursive(file.path, ['.*'], function(err, files) {
-						formatFilesFromPath(files).forEach((file)=> dispatch(addFile(file)));
+					recursive(file.path, ['.*'], (err, files)=> {
+						formatFilesFromPath(files).forEach((file)=> this.props.dispatch(addFile(file)));
 					});
 				} else {
-					dispatch(addFile(file));
+					this.props.dispatch(addFile(file));
 				}
 			});
 		})
-		dispatch(renameFiles());
+		this.props.dispatch(renameFiles());
 	},
-	handleAddTransform(dispatch) {
-		dispatch(addTransform());
-		dispatch(renameFiles());
+	handleAddTransform() {
+		this.props.dispatch(addTransform());
+		this.props.dispatch(renameFiles());
 	},
-	handleRemoveTransform(dispatch, index) {
-		dispatch(removeTransform(index));
-		dispatch(renameFiles());
+	handleRemoveTransform(index) {
+		var self = this;
+		this.props.dispatch(removeTransformAsnyc(index))
+		.then(() =>{
+			console.log(self.props.transforms);
+			self.props.dispatch(renameFiles());
+		});
 	},
-	handleChangeTransform(dispatch, transform) {
-		dispatch(changeTransform(transform));
-		dispatch(renameFiles());
+	handleChangeTransform(transform) {
+		this.props.dispatch(changeTransform(transform));
+		this.props.dispatch(renameFiles());
 	},
 	render() {
 		const {dispatch, files, transforms} = this.props;
 		return (
 			<div className="pane-group">
-				<FileList onAddFiles={(files)=> this.handleAddFiles(dispatch, files)} files={files} onClearClick={()=> dispatch(clearFiles())} />
+				<FileList onAddFiles={this.handleAddFiles} files={files} onClearClick={()=> dispatch(clearFiles())} />
 				<Transforms transforms={transforms}
-					onAddTransform={()=> {this.handleAddTransform(dispatch)}}
-					onChangeTransform={(transform)=> {this.handleChangeTransform(dispatch, transform)}}
-					onRemoveTransform={(idx)=> this.handleRemoveTransform(dispatch, idx)}/>
+					onAddTransform={this.handleAddTransform}
+					onChangeTransform={this.handleChangeTransform}
+					onRemoveTransform={this.handleRemoveTransform} />
 			</div>
 		)
 	}

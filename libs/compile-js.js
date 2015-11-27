@@ -18,7 +18,7 @@ var compile = function(watch) {
 	});
 
 	if (watch) {
-		bundler = watchify(bundler);
+		bundler.plugin(watchify);
 	}
 
 	function rebundle() {

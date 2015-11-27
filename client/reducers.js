@@ -46,7 +46,6 @@ const tranformerApp = function(state = initialState, action) {
 				transforms: [
 					...state.transforms.slice(0, action.index),
 					...state.transforms.slice(action.index + 1)
-
 				]
 			})
 

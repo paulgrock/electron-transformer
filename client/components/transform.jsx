@@ -4,11 +4,6 @@ import TransformOptionSelect from './transform-option-select.jsx'
 import transformList from '../transform-list';
 
 export default React.createClass({
-	getInitialState() {
-		return {
-			selectedTransform: null
-		}
-	},
 	handleChange(e) {
 		var transformTypeEl = this.refs["transform-type"];
 		const formElementsNodeList = this.refs["transform-form"].querySelectorAll("[name]");
@@ -18,32 +13,29 @@ export default React.createClass({
 				return prev;
 			}, {});
 
-		this.setState({
-			selectedTransform: transformTypeEl.value
-		});
-
 		this.props.onChangeTransform({
 			index: this.props.index,
 			style: transformTypeEl.value,
 			args: els
 		})
 	},
-	handleRemove(idx) {
-		this.props.onRemoveTransform(idx)
+	handleRemove() {
+		this.props.onRemoveTransform(this.props.index)
 	},
 	render() {
+		let { index, transform } = this.props;
 		let AdditionalTransformOptions;
 		let AdditionalTransformOptionsList;
 		const transformListArray = Object.keys(transformList);
-		let selectedTransform = transformList[this.state.selectedTransform];
-		let TransformOption = transformListArray.map(function(key) {
+		let selectedTransform = transformList[transform.style];
+		let TransformOption = transformListArray.map((key, idx) =>{
 			return (
-				<option value={key}>{transformList[key].name}</option>
+				<option value={key} key={key}>{transformList[key].name}</option>
 			)
 		})
 
 		if (selectedTransform && selectedTransform.options != null) {
-			AdditionalTransformOptionsList = selectedTransform.options.map(function(transformOption) {
+			AdditionalTransformOptionsList = selectedTransform.options.map((transformOption) => {
 				if (transformOption.type === 'select') {
 					return <TransformOptionSelect option={transformOption} ref="transform-option-select" />
 				}
@@ -62,12 +54,12 @@ export default React.createClass({
 		return (
 			<li className="list-group-item">
 				<form onChange={this.handleChange} ref="transform-form">
-					<select name="transform-type" ref="transform-type" className="form-control">
+					<select name="transform-type" ref="transform-type" className="form-control" value={transform.style}  onChange={this.handleChange}>
 						{TransformOption}
 					</select>
 					{AdditionalTransformOptions}
 				</form>
-				<button onClick={this.handleRemove.bind(this, this.props.index)}><span className="icon icon-minus"></span></button>
+				<button onClick={this.handleRemove}><span className="icon icon-minus"></span></button>
 			</li>
 		)
 	}
