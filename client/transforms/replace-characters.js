@@ -1,7 +1,7 @@
 export default {
 	"replace-characters": {
 		name: "Replace",
-		method: function(str, args) {
+		method: function(str, args = {}) {
 			var origStr = args['original-string'];
 			var replacementStr = args['replacement-string'];
 			if (!origStr || !replacementStr) {

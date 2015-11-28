@@ -14,7 +14,6 @@ var remote = window.require('remote');
 var dialog = remote.require('dialog');
 var fs = remote.require('fs');
 var recursive = remote.require('recursive-readdir');
-// import recursive from 'recursive-readdir';
 import { formatFilesFromPath } from '../utils/file-formatter';
 
 ipc.on('error', (err)=> {
@@ -53,10 +52,7 @@ const App = React.createClass({
 	handleRemoveTransform(index) {
 		var self = this;
 		this.props.dispatch(removeTransform(index))
-		.then(() =>{
-			console.log(self.props.transforms);
-			self.props.dispatch(renameFiles());
-		});
+		this.props.dispatch(renameFiles());
 	},
 	handleChangeTransform(transform) {
 		this.props.dispatch(changeTransform(transform));

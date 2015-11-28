@@ -8,8 +8,9 @@ export default React.createClass({
 		if (style === "number") {
 			placeholder = 0;
 		}
+		
 		return (
-			<input type={style} name={name} placeholder={placeholder} className="form-control" onChange={this.props.handleChange} />
+			<input type={style} name={name} placeholder={placeholder} className="form-control" onChange={this.props.handleChange} value={this.props.transform.args[name]} />
 		);
 	}
 });

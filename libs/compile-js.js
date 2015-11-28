@@ -35,12 +35,6 @@ var compile = function(watch) {
 			})
 			.on('error', handleErrors)
 			.pipe(source('build.js'))
-			.pipe(buffer())
-			.pipe(sourcemaps.init({
-				loadMaps: true
-			}))
-			.pipe(uglify())
-			.pipe(sourcemaps.write('./'))
 			.pipe(gulp.dest('./dist/'));
   }
 
