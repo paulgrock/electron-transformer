@@ -52,7 +52,7 @@ export default React.createClass({
 		}
 
 		return (
-			<li className="list-group-item">
+			<li className="list-group-item" data-position={this.props.index}>
 				<form ref="transform-form">
 					<select name="transform-type" ref="transform-type" className="form-control" value={transform.style}  onChange={this.handleStyleChange}>
 						{TransformOption}

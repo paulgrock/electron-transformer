@@ -1,7 +1,7 @@
 export default {
 	"remove-characters": {
 		name: "Remove Characters",
-		method: function(str, args) {
+		method: function(str, args = {}) {
 			args.from = args.from || 'start';
 			var strArray = str.split('');
 			if (args.from === 'start') {

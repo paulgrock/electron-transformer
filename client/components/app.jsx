@@ -9,7 +9,8 @@ import addTransform from '../actions/add-transform';
 import changeTransform from '../actions/change-transform';
 import removeTransform from '../actions/remove-transform';
 import clearFiles from '../actions/clear-files';
-import renameFiles from '../actions/rename-files'
+import renameFiles from '../actions/rename-files';
+import changePosition from '../actions/change-position';
 var remote = window.require('remote');
 var dialog = remote.require('dialog');
 var fs = remote.require('fs');
@@ -58,6 +59,10 @@ const App = React.createClass({
 		this.props.dispatch(changeTransform(transform));
 		this.props.dispatch(renameFiles());
 	},
+	handlePositionChange(previousPosition, newPosition) {
+		this.props.dispatch(changePosition(previousPosition, newPosition));
+		this.props.dispatch(renameFiles());
+	},
 	render() {
 		const {dispatch, files, transforms} = this.props;
 		return (
@@ -66,7 +71,8 @@ const App = React.createClass({
 				<Transforms transforms={transforms}
 					onAddTransform={this.handleAddTransform}
 					onChangeTransform={this.handleChangeTransform}
-					onRemoveTransform={this.handleRemoveTransform} />
+					onRemoveTransform={this.handleRemoveTransform}
+					onPositionChange={this.handlePositionChange} />
 			</div>
 		)
 	}

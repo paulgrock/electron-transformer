@@ -1,7 +1,7 @@
 export default {
 	"add-characters": {
 		name: "Add Characters",
-		method: function(str, args) {
+		method: function(str, args = {}) {
 			args.from = args.from || 'start';
 			if (args["additional-characters"] == null) {
 				return str;
