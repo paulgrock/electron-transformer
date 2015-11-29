@@ -9,7 +9,10 @@ module.exports = function() {
 	])
 	.pipe(sourcemaps.init())
 	.pipe(sass({
-		outputStyle: 'extended'
+		style: 'compressed',
+		includePaths: [
+			'./node_modules'
+		]
 	}))
 	.pipe(sourcemaps.write('./maps'))
 	.pipe(gulp.dest('./dist'))

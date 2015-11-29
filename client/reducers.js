@@ -1,10 +1,28 @@
 import * as types from './actions/types';
 import renameFile from './rename-file';
+import { combineReducers } from 'redux';
+import addFile from './reducers/add-file';
+import addTransform from './reducers/add-transform';
+import changePosition from './reducers/change-position';
+import changeTransform from './reducers/change-transform';
+import clearFiles from './reducers/clear-files';
+import removeTransform from './reducers/remove-transform';
+import renameFiles from './reducers/rename-files';
 
 const initialState = {
 	files: [],
 	transforms: []
 }
+
+const reducers = combineReducers({
+	addFile,
+	addTransform,
+	changePosition,
+	changeTransform,
+	clearFiles,
+	transforms: removeTransform,
+	renameFiles
+});
 
 const tranformerApp = function(state = initialState, action) {
 	switch (action.type) {
@@ -74,3 +92,5 @@ const tranformerApp = function(state = initialState, action) {
 }
 
 export default tranformerApp;
+
+export { reducers };

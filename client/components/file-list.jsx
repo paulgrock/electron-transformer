@@ -16,10 +16,12 @@ export default React.createClass({
 	},
 	handleClick(e) {
 		e.preventDefault();
+		const fileLength = this.props.files.length;
+		let filesPluralized = fileLength === 1 ? 'file': 'files';
 		const dialogButtons = ['Yes', 'Cancel'];
 		const opts = {
 			type: 'question',
-			message: `About to change ${this.props.files.length}. Are you cool with that?`,
+			message: `About to change ${fileLength} ${filesPluralized}. Are you cool with that?`,
 			buttons: dialogButtons
 		};
 		dialog.showMessageBox(opts, (response)=> {
@@ -53,24 +55,27 @@ export default React.createClass({
 
 		return (
 			<div className="pane" onDrop={this.handleDrop}>
-				<div className="padded-more">
-					<h1>File List</h1>
-					<table className="table-striped">
-						<thead>
-							<tr>
-								<th>Original File Name</th>
-								<th>New File Name</th>
-							</tr>
-						</thead>
-						<tbody>
-							{ListOfFiles}
-						</tbody>
-					</table>
-					<div className="btn-group padded-top-more pull-right">
-						<button onClick={this.handleAddFiles}>Add Files</button>
-						<button onClick={this.handleClick}>Change</button>
-						<button onClick={this.props.onClearClick}>Clear</button>
-					</div>
+				<table className="table-striped">
+					<thead>
+						<tr>
+							<th>Original File Name</th>
+							<th>New File Name</th>
+						</tr>
+					</thead>
+					<tbody>
+						{ListOfFiles}
+					</tbody>
+				</table>
+				<div className="btn-group padded-top-more pull-right">
+					<button className="btn btn-dark" onClick={this.handleAddFiles}>
+						<span className="icon icon-folder"></span>
+					</button>
+					<button className="btn btn-dark" onClick={this.handleClick}>
+						<span className="icon icon-floppy"></span>
+					</button>
+					<button className="btn btn-dark" onClick={this.props.onClearClick}>
+						Clear
+					</button>
 				</div>
 			</div>
 		)

@@ -1,7 +1,6 @@
 'use strict';
 require("babel-core/register");
 
-
 const app = require('app');
 const BrowserWindow = require('browser-window');
 const ipc = require('ipc');
@@ -28,7 +27,9 @@ function onClosed() {
 function createMainWindow() {
 	const win = new BrowserWindow({
 		width: 1200,
-		height: 800
+		height: 800,
+		"title-bar-style": 'hidden',
+		title: 'Transformer'
 	});
 
 	win.loadUrl(`file://${__dirname}/index.html`);

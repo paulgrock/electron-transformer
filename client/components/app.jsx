@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FileList from './file-list.jsx';
 import Transforms from './transforms.jsx';
+import Header from './header.jsx';
 var ipc = window.require('ipc');
 import addFile from '../actions/add-file';
 import addTransform from '../actions/add-transform';
@@ -66,13 +67,21 @@ const App = React.createClass({
 	render() {
 		const {dispatch, files, transforms} = this.props;
 		return (
-			<div className="pane-group">
-				<FileList onAddFiles={this.handleAddFiles} files={files} onClearClick={()=> dispatch(clearFiles())} />
-				<Transforms transforms={transforms}
-					onAddTransform={this.handleAddTransform}
-					onChangeTransform={this.handleChangeTransform}
-					onRemoveTransform={this.handleRemoveTransform}
-					onPositionChange={this.handlePositionChange} />
+			<div className="window">
+				<Header />
+				<div className="window-content">
+					<div className="pane-group">
+						<FileList onAddFiles={this.handleAddFiles} files={files} onClearClick={()=> dispatch(clearFiles())} />
+						<Transforms transforms={transforms}
+							onAddTransform={this.handleAddTransform}
+							onChangeTransform={this.handleChangeTransform}
+							onRemoveTransform={this.handleRemoveTransform}
+							onPositionChange={this.handlePositionChange} />
+					</div>
+				</div>
+				<footer className="toolbar toolbar-footer">
+					Just some random footer stuff
+				</footer>
 			</div>
 		)
 	}
