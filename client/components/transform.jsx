@@ -59,7 +59,9 @@ export default React.createClass({
 					</select>
 					{AdditionalTransformOptions}
 				</form>
-				<button onClick={this.handleRemove}><span className="icon icon-minus"></span></button>
+				<button onClick={this.handleRemove} className="btn btn-dark">
+					<span className="icon icon-minus"></span>
+				</button>
 			</li>
 		)
 	}

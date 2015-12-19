@@ -34,6 +34,12 @@ function createMainWindow() {
 
 	win.loadUrl(`file://${__dirname}/index.html`);
 	win.on('closed', onClosed);
+	win.on('blur', function() {
+		win.webContents.send('lost-focus');
+	});
+	win.on('focus', function() {
+		win.webContents.send('gained-focus');
+	});
 
 	var template = [
 		{

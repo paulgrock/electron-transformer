@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import App from './components/app.jsx';
-import {default as reducer, reducers } from './reducers';
+import { default as reducer, reducers } from './reducers';
 
 // TODO: combinedStore is a mess. Should be more like remove-transform
 let combinedStore = applyMiddleware(thunk)(createStore)(reducers)

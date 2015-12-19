@@ -20,6 +20,9 @@ $dark-button-bottom-active-color: $jaguar;
 
 .window {
 	background-color: $mine-shaft;
+}
+
+.window-content {
 	color: $stack;
 }
 
@@ -48,9 +51,11 @@ tbody {
 	}
 }
 
-.window-content {
-	.btn-group .btn + .btn {
-		border-left-color: $tuatara;
+.btn-group {
+	.btn-dark {
+		& + .btn-dark {
+			border-left-color: $tuatara;
+		}
 	}
 }
 

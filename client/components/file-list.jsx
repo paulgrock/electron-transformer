@@ -14,7 +14,7 @@ export default React.createClass({
 	componentWillMount: function() {
 		ipc.on('new-files', this.addFiles);
 	},
-	handleClick(e) {
+	handleSaveFiles(e) {
 		e.preventDefault();
 		const fileLength = this.props.files.length;
 		let filesPluralized = fileLength === 1 ? 'file': 'files';
@@ -70,7 +70,7 @@ export default React.createClass({
 					<button className="btn btn-dark" onClick={this.handleAddFiles}>
 						<span className="icon icon-folder"></span>
 					</button>
-					<button className="btn btn-dark" onClick={this.handleClick}>
+					<button className="btn btn-dark" onClick={this.handleSaveFiles}>
 						<span className="icon icon-floppy"></span>
 					</button>
 					<button className="btn btn-dark" onClick={this.props.onClearClick}>

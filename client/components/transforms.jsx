@@ -34,7 +34,7 @@ export default React.createClass({
 					{transformList}
 				</ul>
 				<div className="padded-more">
-					<button onClick={this.handleAddTransform}>
+					<button className="btn btn-dark" onClick={this.handleAddTransform}>
 						<span className="icon icon-plus"></span>
 					</button>
 				</div>
