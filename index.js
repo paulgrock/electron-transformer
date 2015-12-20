@@ -1,5 +1,4 @@
 'use strict';
-require("babel-register");
 
 const app = require('app');
 const BrowserWindow = require('browser-window');
@@ -7,10 +6,10 @@ const ipc = require("electron").ipcMain;
 const fs = require('fs');
 const path = require('path');
 const Menu = require('menu');
-var dialog = require('dialog');
+import dialog from 'dialog';
 
 // report crashes to the Electron project
-require('crash-reporter').start();
+// require('crash-reporter').start();
 
 // adds debug features like hotkeys for triggering dev tools and reload
 require('electron-debug')();

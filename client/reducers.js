@@ -64,7 +64,6 @@ const tranformerApp = function(state = initialState, action) {
 			var stateCopy = state.transforms.slice();
 			var removedTransform = stateCopy.splice(action.previousPosition, 1);
 			stateCopy.splice(action.newPosition, 0, removedTransform[0]);
-			console.log(stateCopy);
 			return Object.assign({}, state, {
 				transforms: stateCopy
 			})

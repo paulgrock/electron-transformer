@@ -32,27 +32,29 @@ ipc.on('file-write-success', (event, fileCount)=> {
 });
 
 const App = React.createClass({
+	dispatchAddFile(file) {
+		this.props.dispatch(addFile(file));
+		this.props.dispatch(renameFiles());
+	},
 	handleAddFiles(files) {
 		this.props.dispatch(clearFiles());
 		files.forEach((file)=> {
 			fs.stat(file.path, (err, stats)=> {
 				if (stats.isDirectory()) {
 					recursive(file.path, ['.*'], (err, files)=> {
-						formatFilesFromPath(files).forEach((file)=> this.props.dispatch(addFile(file)));
+						formatFilesFromPath(files).forEach(this.dispatchAddFile);
 					});
 				} else {
-					this.props.dispatch(addFile(file));
+					this.dispatchAddFile((file));
 				}
 			});
 		})
-		this.props.dispatch(renameFiles());
 	},
 	handleAddTransform() {
 		this.props.dispatch(addTransform());
 		this.props.dispatch(renameFiles());
 	},
 	handleRemoveTransform(index) {
-		var self = this;
 		this.props.dispatch(removeTransform(index))
 		this.props.dispatch(renameFiles());
 	},

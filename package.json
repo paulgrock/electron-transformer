@@ -1,6 +1,7 @@
 {
   "name": "elec-rename",
   "productName": "Transformer",
+  "companyName": "paulgrock.com",
   "version": "0.0.0",
   "description": "My groundbreaking app",
   "license": "MIT",
@@ -13,11 +14,13 @@
   "engines": {
     "node": ">=4"
   },
+  "main": "bootstrapper",
   "electronVersion": "0.34.1",
   "scripts": {
-    "test": "xo",
     "start": "electron .",
-    "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=$npm_package_electronVersion"
+    "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=$npm_package_electronVersion",
+    "test": "mocha --compilers js:babel-register test/*.test.js",
+    "coverage": "nyc --require babel-register npm test"
   },
   "files": [
     "index.js",
@@ -59,6 +62,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-task-loader": "^1.2.3",
     "gulp-uglify": "^1.5.1",
+    "mocha-jsdom": "^1.0.0",
     "uglify": "^0.1.5",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
