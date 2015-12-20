@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import FileList from './file-list.jsx';
 import Transforms from './transforms.jsx';
 import Header from './header.jsx';
-var ipc = window.require('ipc');
+var ipc = window.require("electron").ipcRenderer;
 import addFile from '../actions/add-file';
 import addTransform from '../actions/add-transform';
 import changeTransform from '../actions/change-transform';
@@ -18,12 +18,12 @@ var fs = remote.require('fs');
 var recursive = remote.require('recursive-readdir');
 import { formatFilesFromPath } from '../utils/file-formatter';
 
-ipc.on('error', (err)=> {
+ipc.on('error', (event, err)=> {
 	console.error(err);
 	dialog.showErrorBox('Something went wrong', err);
 });
 
-ipc.on('file-write-success', (fileCount)=> {
+ipc.on('file-write-success', (event, fileCount)=> {
 	dialog.showMessageBox({
 		type: 'info',
 		message: 'Wrote ' + fileCount + ' files',
@@ -68,7 +68,7 @@ const App = React.createClass({
 		const {dispatch, files, transforms} = this.props;
 		return (
 			<div className="window">
-				<Header />
+				<Header onAddFiles={this.handleAddFiles} files={files} />
 				<div className="window-content">
 					<div className="pane-group">
 						<FileList onAddFiles={this.handleAddFiles} files={files} onClearClick={()=> dispatch(clearFiles())} />

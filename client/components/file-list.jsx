@@ -1,10 +1,9 @@
-var ipc = window.require('ipc');
+var ipc = window.require("electron").ipcRenderer;
 import React from 'react';
 import File from './file.jsx';
 import { formatFileProperties, formatFilesFromPath } from '../utils/file-formatter';
-var remote = window.require('remote');
-var dialog = remote.require('dialog');
 import openDialog from '../utils/open-dialog';
+import saveDialog from '../utils/save-dialog';
 
 export default React.createClass({
 	addFiles: function(files) {
@@ -12,22 +11,15 @@ export default React.createClass({
 		this.props.onAddFiles(formattedFiles);
 	},
 	componentWillMount: function() {
-		ipc.on('new-files', this.addFiles);
+		ipc.on('new-files', (event, files) => this.addFiles(files) );
 	},
 	handleSaveFiles(e) {
 		e.preventDefault();
-		const fileLength = this.props.files.length;
-		let filesPluralized = fileLength === 1 ? 'file': 'files';
-		const dialogButtons = ['Yes', 'Cancel'];
-		const opts = {
-			type: 'question',
-			message: `About to change ${fileLength} ${filesPluralized}. Are you cool with that?`,
-			buttons: dialogButtons
-		};
-		dialog.showMessageBox(opts, (response)=> {
-			if (dialogButtons[response] !== 'Cancel') {
-				ipc.send('write-files', this.props.files);
+		saveDialog(this.props.files, (err, files) => {
+			if (err) {
+				return console.error(err);
 			}
+			ipc.send('write-files', files);
 		})
 	},
 	handleDrop: function(e) {
@@ -36,11 +28,6 @@ export default React.createClass({
 		this.props.onAddFiles(fileList);
 	},
 	handleAddFiles() {
-		const opts = {
-			title: 'Add files to be transmformed',
-			properties: ['openFile', 'multiSelections', 'createDirectory']
-		};
-
 		openDialog(null, (err, files)=>{
 			if (err) {
 				return console.error(err);

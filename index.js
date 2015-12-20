@@ -1,9 +1,9 @@
 'use strict';
-require("babel-core/register");
+require("babel-register");
 
 const app = require('app');
 const BrowserWindow = require('browser-window');
-const ipc = require('ipc');
+const ipc = require("electron").ipcMain;
 const fs = require('fs');
 const path = require('path');
 const Menu = require('menu');
@@ -32,7 +32,7 @@ function createMainWindow() {
 		title: 'Transformer'
 	});
 
-	win.loadUrl(`file://${__dirname}/index.html`);
+	win.loadURL(`file://${__dirname}/index.html`);
 	win.on('closed', onClosed);
 	win.on('blur', function() {
 		win.webContents.send('lost-focus');
