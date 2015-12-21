@@ -8,7 +8,7 @@ export default {
 				return str.slice(args.amount);
 			}
 			if (args.amount == null) {
-				args.amount = 0
+				args.amount = 0;
 			}
 
 			strArray.length = Math.max(strArray.length - args.amount, 0);

@@ -2,6 +2,9 @@ import path from 'path';
 import transformList from './transforms/list';
 
 const renameFile = (file, transforms)=> {
+	if (transforms == null) {
+		return file;
+	}
 	var extension = path.extname(file.originalFileName);
 	var originalFileNameWithoutExt = path.basename(file.originalFileName, extension);
 	var transformedFileName = transforms.reduce(function(file, transform) {
