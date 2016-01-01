@@ -91,4 +91,4 @@ const App = React.createClass({
 
 const select = state => state;
 
-export default connect(select)(DragDropContext(HTML5Backend)(App));
+export default connect(select)(App);

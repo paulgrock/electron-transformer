@@ -1,6 +1,8 @@
 import React from 'react';
 import Transform from './transform.jsx';
 import Button from './button.jsx';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 const TransformList =  React.createClass({
 	handleAddTransform: function(e) {
@@ -27,4 +29,4 @@ const TransformList =  React.createClass({
 	}
 });
 
-export default TransformList;
+export default DragDropContext(HTML5Backend)(TransformList);
