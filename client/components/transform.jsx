@@ -2,8 +2,39 @@ import React from 'react';
 import TransformOptionInput from './transform-option-input.jsx'
 import TransformOptionSelect from './transform-option-select.jsx'
 import transformList from '../transforms/list';
+import { DragSource, DropTarget } from 'react-dnd';
 
-export default React.createClass({
+var transformSource = {
+	beginDrag: function (props) {
+		return {
+			transformId: props.index
+		};
+  }
+}
+
+const collectDrag = (connect, monitor) => {
+	return {
+		connectDragSource: connect.dragSource(),
+		isDragging: monitor.isDragging()
+	}
+}
+
+var dropTarget = {
+	drop(props, monitor) {
+		const previousPosition = monitor.getItem().transformId;
+		const newPosition = props.index;
+		props.onPositionChange(previousPosition, newPosition);
+  }
+};
+
+const collectDrop = (connect, monitor) =>{
+	return {
+		connectDropTarget: connect.dropTarget(),
+		isOver: monitor.isOver()
+	};
+};
+
+const Transform =  React.createClass({
 	handleStyleChange(e) {
 		const transformName = e.target.value
 		const opts = transformList[transformName].options;
@@ -22,7 +53,8 @@ export default React.createClass({
 		this.props.onRemoveTransform(this.props.index)
 	},
 	render() {
-		let { index, transform } = this.props;
+		let { index, transform, connectDragSource, isDragging, connectDropTarget } = this.props;
+
 		let AdditionalTransformOptions;
 		let AdditionalTransformOptionsList;
 		const transformListArray = Object.keys(transformList);
@@ -51,8 +83,9 @@ export default React.createClass({
 			)
 		}
 
-		return (
-			<li className="list-group-item" data-position={this.props.index}>
+		return connectDropTarget(connectDragSource(
+			<li className="list-group-item" data-position={this.props.index} style={{
+        opacity: isDragging ? 0.5 : 1}}>
 				<form ref="transform-form">
 					<select name="transform-type" ref="transform-type" className="form-control" value={transform.style}  onChange={this.handleStyleChange}>
 						{TransformOption}
@@ -63,6 +96,8 @@ export default React.createClass({
 					<span className="icon icon-minus"></span>
 				</button>
 			</li>
-		)
+		))
 	}
 })
+
+export default DropTarget("TRANSFORM", dropTarget, collectDrop)(DragSource("TRANSFORM", transformSource, collectDrag)(Transform));

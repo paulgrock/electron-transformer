@@ -2,28 +2,15 @@ import React from 'react';
 import Transform from './transform.jsx';
 import dragula from 'react-dragula';
 
-export default React.createClass({
-	componentDidMount: function () {
-		// FIXME: This whole drag thing isn't working
-		// const transformList = this.refs['transform-list'];
-    // var dragger = dragula([transformList]);
-		//
-		// dragger.on('drop', (el, target, source, sibling)=> {
-		// 	const previousPosition = el.dataset.position;
-		// 	let newPosition = this.props.transforms.length;
-		// 	if (sibling && sibling.dataset) {
-		// 		newPosition = sibling.dataset.position;
-		// 	}
-		// 	this.props.onPositionChange(previousPosition, newPosition);
-		// });
-  },
+const TransformList =  React.createClass({
 	handleAddTransform: function(e) {
 		e.preventDefault();
 		this.props.onAddTransform()
 	},
 	render() {
+		console.log(this.props);
 		var transformList = this.props.transforms.map((transform, idx)=> {
-			return <Transform key={idx} onChangeTransform={this.props.onChangeTransform} onRemoveTransform={this.props.onRemoveTransform} index={idx} transform={transform} />
+			return <Transform key={idx} {...this.props} index={idx} transform={transform} />
 		})
 		return (
 			<aside className="pane-sm sidebar">
@@ -41,4 +28,6 @@ export default React.createClass({
 			</aside>
 		)
 	}
-})
+});
+
+export default TransformList;

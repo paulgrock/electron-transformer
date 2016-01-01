@@ -1,6 +1,9 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
 import FileList from './file-list.jsx';
 import Transforms from './transforms.jsx';
 import Header from './header.jsx';
@@ -81,16 +84,11 @@ const App = React.createClass({
 							onPositionChange={this.handlePositionChange} />
 					</div>
 				</div>
-				<footer className="toolbar toolbar-footer">
-					Just some random footer stuff
-				</footer>
 			</div>
 		)
 	}
 })
 
-const select = (state)=> {
-	return state
-}
+const select = state => state;
 
-export default connect(select)(App);
+export default connect(select)(DragDropContext(HTML5Backend)(App));
