@@ -37,6 +37,7 @@
     "babel-preset-react": "^6.0.14",
     "babel-register": "^6.3.13",
     "electron-debug": "^0.3.0",
+    "lodash.snakecase": "^3.0.1",
     "react": "^0.14.1",
     "react-dnd": "^2.0.2",
     "react-dnd-html5-backend": "^2.0.0",
