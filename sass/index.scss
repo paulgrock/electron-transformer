@@ -5,6 +5,7 @@ $toolbar-top-color: #4F4F4F;
 $toolbar-bottom-color: #343434;
 $toolbar-separator-color: #262626;
 $charcoal: #404040;
+$stack: #8B8B8B;
 $ship-gray: #505050;
 $light-gray: #D6D6D6;
 $montana: #3B3B3B;
@@ -24,7 +25,7 @@ $dark-button-bottom-active-color: $jaguar;
 }
 
 .window-content {
-	color: white;
+	color: $light-gray;
 }
 
 .sidebar {
@@ -76,12 +77,17 @@ tbody {
 	background-image: linear-gradient(to bottom, $dark-button-top-active-color, $dark-button-bottom-active-color);
 }
 
-
-
 .list-group-item {
+	border-top-color: transparent;
 	input {
 		display: block;
 	}
+}
+
+.list-group-item + .list-group-item {
+	border-top-color: $toolbar-separator-color;
+	box-shadow: inset 0 1px $tuatara;
+	margin-left: 1px;
 }
 
 .add-more-transforms {
