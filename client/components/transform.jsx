@@ -44,7 +44,9 @@ const Transform =  React.createClass({
 			<li className="list-group-item" style={{
         opacity: isDragging ? 0.5 : 1}}>
 				<TransformForm transform={transform} onChangeTransform={onChangeTransform} index={index} />
-				<Button type="minus" handler={this.handleRemove} />
+				<div className="minus-button-container pull-right">
+					<Button type="minus" handler={this.handleRemove} />
+				</div>
 			</li>
 		))
 	}

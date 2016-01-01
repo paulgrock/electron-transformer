@@ -17,11 +17,11 @@ const TransformList =  React.createClass({
 			<aside className="pane-sm sidebar">
 				<ul className="list-group" ref="transform-list">
 					<li className="list-group-header">
-						<h3>Transforms</h3>
+						<h4>Transforms</h4>
 					</li>
 					{transformList}
 				</ul>
-				<div className="padded-more">
+				<div className="add-more-transforms">
 					<Button type="plus" handler={this.handleAddTransform} />
 				</div>
 			</aside>

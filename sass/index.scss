@@ -1,14 +1,15 @@
 $mine-shaft: #333;
 $bokara-gray: #292929;
-$tuatara: #444444;
+$tuatara: #444;
 $toolbar-top-color: #4F4F4F;
 $toolbar-bottom-color: #343434;
 $toolbar-separator-color: #262626;
 $charcoal: #404040;
-$stack: #8B8B8B;
 $ship-gray: #505050;
+$light-gray: #D6D6D6;
 $montana: #3B3B3B;
 $jaguar: #2B2B2B;
+$tuatara: #353535;
 $dark-button-top-color: $charcoal;
 $dark-button-bottom-color: $mine-shaft;
 $dark-button-top-active-color: $montana;
@@ -23,11 +24,13 @@ $dark-button-bottom-active-color: $jaguar;
 }
 
 .window-content {
-	color: $stack;
+	color: white;
 }
 
 .sidebar {
 	background-color: $bokara-gray;
+	border-left: 1px solid $toolbar-separator-color;
+	box-shadow: inset 1px 0 $tuatara;
 }
 
 thead {
@@ -60,10 +63,12 @@ tbody {
 }
 
 .btn-dark {
-	color: $stack;
 	border-color: $tuatara;
 	background-color: $dark-button-top-color;
 	background-image: linear-gradient(to bottom, $dark-button-top-color, $dark-button-bottom-color);
+	.icon {
+		color: $light-gray;
+	}
 }
 
 .btn-dark:active {
@@ -77,4 +82,12 @@ tbody {
 	input {
 		display: block;
 	}
+}
+
+.add-more-transforms {
+	padding: 10px;
+}
+
+.minus-button-container {
+	margin-top: 5px;
 }

@@ -30,7 +30,7 @@ const FileList = React.createClass({
 						{ListOfFiles}
 					</tbody>
 				</table>
-				<div className="btn-group padded-top-more pull-right">
+				<div className="btn-group padded-more pull-right">
 					<Button type="folder" handler={handleAddFiles} />
 					<Button type="floppy" handler={handleSaveFiles} />
 					<button className="btn btn-dark" onClick={this.props.onClearClick}>
