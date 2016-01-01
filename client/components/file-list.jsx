@@ -1,42 +1,22 @@
 var ipc = window.require("electron").ipcRenderer;
 import React from 'react';
 import File from './file.jsx';
-import { formatFileProperties, formatFilesFromPath } from '../utils/file-formatter';
-import openDialog from '../utils/open-dialog';
-import saveDialog from '../utils/save-dialog';
+import { formatFileProperties} from '../utils/file-formatter';
 import Button from './button.jsx';
+import DialogHandler from './dialog-handler.jsx';
 
-export default React.createClass({
-	addFiles: function(files) {
-		var formattedFiles = formatFilesFromPath(files);
-		this.props.onAddFiles(formattedFiles);
-	},
+const FileList = React.createClass({
 	componentWillMount: function() {
 		ipc.on('new-files', (event, files) => this.addFiles(files) );
-	},
-	handleSaveFiles(e) {
-		e.preventDefault();
-		saveDialog(this.props.files, (err, files) => {
-			if (err) {
-				return console.error(err);
-			}
-			ipc.send('write-files', files);
-		})
 	},
 	handleDrop: function(e) {
 		e.preventDefault();
 		const fileList = [...e.dataTransfer.files].map(formatFileProperties);
 		this.props.onAddFiles(fileList);
 	},
-	handleAddFiles() {
-		openDialog(null, (err, files)=>{
-			if (err) {
-				return console.error(err);
-			}
-			return this.addFiles(files);
-		});
-	},
 	render() {
+		const { handleAddFiles, handleSaveFiles } = this.props;
+
 		let ListOfFiles = this.props.files.map((file)=> {
 			return <File file={file} key={file.originalFileName} />
 		});
@@ -55,8 +35,8 @@ export default React.createClass({
 					</tbody>
 				</table>
 				<div className="btn-group padded-top-more pull-right">
-					<Button type="folder" handler={this.handleAddFiles} />
-					<Button type="floppy" handler={this.handleSaveFiles} />
+					<Button type="folder" handler={handleAddFiles} />
+					<Button type="floppy" handler={handleSaveFiles} />
 					<button className="btn btn-dark" onClick={this.props.onClearClick}>
 						Clear
 					</button>
@@ -65,3 +45,5 @@ export default React.createClass({
 		)
 	}
 })
+
+export default DialogHandler(FileList);
