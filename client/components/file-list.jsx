@@ -1,14 +1,10 @@
-var ipc = window.require("electron").ipcRenderer;
 import React from 'react';
 import File from './file.jsx';
-import { formatFileProperties} from '../utils/file-formatter';
+import { formatFileProperties } from '../utils/file-formatter';
 import Button from './button.jsx';
 import DialogHandler from './dialog-handler.jsx';
 
 const FileList = React.createClass({
-	componentWillMount: function() {
-		ipc.on('new-files', (event, files) => this.addFiles(files) );
-	},
 	handleDrop: function(e) {
 		e.preventDefault();
 		const fileList = [...e.dataTransfer.files].map(formatFileProperties);

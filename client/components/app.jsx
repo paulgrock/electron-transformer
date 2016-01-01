@@ -1,13 +1,17 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+
+var ipc = window.require("electron").ipcRenderer;
+var remote = window.require('remote');
+var dialog = remote.require('dialog');
+var recursive = remote.require('recursive-readdir');
+var fs = remote.require('fs');
 
 import FileList from './file-list.jsx';
 import Transforms from './transforms.jsx';
 import Header from './header.jsx';
-var ipc = window.require("electron").ipcRenderer;
+
 import addFile from '../actions/add-file';
 import addTransform from '../actions/add-transform';
 import changeTransform from '../actions/change-transform';
@@ -15,10 +19,7 @@ import removeTransform from '../actions/remove-transform';
 import clearFiles from '../actions/clear-files';
 import renameFiles from '../actions/rename-files';
 import changePosition from '../actions/change-position';
-var remote = window.require('remote');
-var dialog = remote.require('dialog');
-var fs = remote.require('fs');
-var recursive = remote.require('recursive-readdir');
+
 import { formatFilesFromPath } from '../utils/file-formatter';
 
 ipc.on('error', (event, err)=> {

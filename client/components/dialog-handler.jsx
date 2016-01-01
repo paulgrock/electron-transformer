@@ -4,7 +4,10 @@ import openDialog from '../utils/open-dialog';
 import saveDialog from '../utils/save-dialog';
 import { formatFilesFromPath } from '../utils/file-formatter';
 
-const DialogHandler = (Wrapped) => React.createClass({
+export default (Wrapped) => React.createClass({
+	componentWillMount: function() {
+		ipc.on('new-files', (event, files) => this.addFiles(files) );
+	},
 	addFiles: function(files) {
 		var formattedFiles = formatFilesFromPath(files);
 		this.props.onAddFiles(formattedFiles);
@@ -32,5 +35,3 @@ const DialogHandler = (Wrapped) => React.createClass({
 		)
 	}
 });
-
-export default DialogHandler;
