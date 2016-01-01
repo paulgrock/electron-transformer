@@ -1,16 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-export default React.createClass({
-	render() {
-		let { style, name } = this.props.option;
-		let placeholder;
-		if (style === "number") {
-			placeholder = 0;
-		}
-		
-		return (
-			<input type={style} name={name} placeholder={placeholder} className="form-control" onChange={this.props.handleChange} value={this.props.transform.args[name]} />
-		);
+export default (props) => {
+	let { style, name } = props.option;
+	let placeholder;
+	if (style === "number") {
+		placeholder = 0;
 	}
-});
+
+	return (
+		<input type={style} name={name} placeholder={placeholder} className="form-control" onChange={props.handleChange} value={props.transform.args[name]} />
+	);
+}
