@@ -30,8 +30,11 @@ $dark-button-bottom-active-color: $jaguar;
 
 .sidebar {
 	background-color: $bokara-gray;
-	border-left: 1px solid $toolbar-separator-color;
-	box-shadow: inset 1px 0 $tuatara;
+	border-right: 1px solid $toolbar-separator-color;
+	box-shadow: inset -1px 0 $tuatara;
+	max-width: 250px;
+	width: 20%;
+	order: -1;
 }
 
 thead {
@@ -87,7 +90,7 @@ tbody {
 .list-group-item + .list-group-item {
 	border-top-color: $toolbar-separator-color;
 	box-shadow: inset 0 1px $tuatara;
-	margin-left: 1px;
+	margin-right: 1px;
 }
 
 .add-more-transforms {
