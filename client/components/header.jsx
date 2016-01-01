@@ -5,7 +5,7 @@ import DialogHandler from './dialog-handler.jsx';
 
 const Header = React.createClass({
 	render() {
-		const { handleAddFiles, handleSaveFiles } = this.props;
+		const {handleAddFiles, handleSaveFiles} = this.props;
 		return (
 			<header className="toolbar toolbar-header">
 				<h1 className="title">Transformer</h1>
@@ -16,9 +16,8 @@ const Header = React.createClass({
 					</div>
 				</div>
 			</header>
-		)
+		);
 	}
 });
-
 
 export default DialogHandler(Header);

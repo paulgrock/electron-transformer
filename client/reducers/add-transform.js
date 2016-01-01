@@ -1,8 +1,8 @@
-import { ADD_TRANSFORM } from '../actions/types';
+import {ADD_TRANSFORM} from '../actions/types';
 const initialState = {
 	files: [],
 	transforms: []
-}
+};
 
 export default function addTransform(state = initialState, action) {
 	switch (action.type) {
@@ -15,7 +15,7 @@ export default function addTransform(state = initialState, action) {
 						args: action.args
 					}
 				]
-			})
+			});
 
 		default:
 			return state;

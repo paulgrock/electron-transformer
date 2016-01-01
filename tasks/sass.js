@@ -1,8 +1,8 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
+import gulp from 'gulp';
+import sass from 'gulp-sass';
+import sourcemaps from 'gulp-sourcemaps';
 
-module.exports = function() {
+module.exports = () => {
 	return gulp.src([
 		'sass/**/*.scss',
 		'!sass/**/_*.scss'
@@ -15,5 +15,5 @@ module.exports = function() {
 		]
 	}))
 	.pipe(sourcemaps.write('./maps'))
-	.pipe(gulp.dest('./dist'))
-}
+	.pipe(gulp.dest('./dist'));
+};

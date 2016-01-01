@@ -1,9 +1,9 @@
 export default {
-	"remove-characters": {
-		name: "Remove Characters",
-		method: function(str, args = {}) {
+	'remove-characters': {
+		name: 'Remove Characters',
+		method(str, args = {}) {
 			args.from = args.from || 'start';
-			var strArray = str.split('');
+			const strArray = str.split('');
 			if (args.from === 'start') {
 				return str.slice(args.amount);
 			}
@@ -12,7 +12,7 @@ export default {
 			}
 
 			strArray.length = Math.max(strArray.length - args.amount, 0);
-			return strArray.join('')
+			return strArray.join('');
 		},
 		options: [
 			{
@@ -36,4 +36,4 @@ export default {
 			}
 		]
 	}
-}
+};

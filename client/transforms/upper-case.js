@@ -1,8 +1,8 @@
 export default {
-	"upper-case": {
-		name: "Upper Case",
-		method: function(str) {
+	'upper-case': {
+		name: 'Upper Case',
+		method(str) {
 			return str.toUpperCase();
 		}
 	}
-}
+};

@@ -1,17 +1,15 @@
 export default {
-	"replace-characters": {
-		name: "Replace",
-		method: function(str, args = {}) {
-			var origStr = args['original-string'];
-			var replacementStr = args['replacement-string'];
+	'replace-characters': {
+		name: 'Replace',
+		method(str, args = {}) {
+			const origStr = args['original-string'];
+			const replacementStr = args['replacement-string'];
 			if (!origStr || !replacementStr) {
 				return str;
 			}
 
-			var matcher = new RegExp(args['original-string'], 'gi')
-
+			const matcher = new RegExp(args['original-string'], 'gi');
 			return str.replace(matcher, replacementStr);
-
 		},
 		options: [
 			{
@@ -26,4 +24,4 @@ export default {
 			}
 		]
 	}
-}
+};

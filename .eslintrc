@@ -1,0 +1,10 @@
+{
+	"extends": ["xo/esnext", "xo-react"],
+	"rules": {
+		"babel/arrow-parens": [2, "always"],
+		"quote-props": [2, "as-needed"],
+		"eqeqeq": [2, "smart"],
+		"no-eq-null": 0,
+		"react/prop-types": 0
+	}
+}

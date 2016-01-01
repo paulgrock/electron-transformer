@@ -1,18 +1,18 @@
 export default {
-	"add-characters": {
-		name: "Add Characters",
-		method: function(str, args = {}) {
+	'add-characters': {
+		name: 'Add Characters',
+		method(str, args = {}) {
 			args.from = args.from || 'start';
-			if (args["additional-characters"] == null) {
+			if (args['additional-characters'] == null) {
 				return str;
 			}
 
 			if (args.from === 'start') {
-				return args["additional-characters"] + str;
+				return args['additional-characters'] + str;
 			}
 
 			if (args.from === 'end') {
-				return str + args["additional-characters"];
+				return str + args['additional-characters'];
 			}
 		},
 		options: [
@@ -37,4 +37,4 @@ export default {
 			}
 		]
 	}
-}
+};

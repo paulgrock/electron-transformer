@@ -1,7 +1,7 @@
-import { RENAME_FILES } from './types';
+import {RENAME_FILES} from './types';
 
-export default function() {
+export default function () {
 	return {
 		type: RENAME_FILES
-	}
+	};
 }

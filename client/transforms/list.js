@@ -8,9 +8,9 @@ import underscored from './underscored';
 import humanize from './humanize';
 
 const defaultTransformList = {
-	"noop": {
-		name: "Select a transform",
-		method: function(str) {
+	noop: {
+		name: 'Select a transform',
+		method(str) {
 			return str;
 		}
 	}

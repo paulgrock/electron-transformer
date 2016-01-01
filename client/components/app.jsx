@@ -1,12 +1,12 @@
 'use strict';
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
-var ipc = window.require("electron").ipcRenderer;
-var remote = window.require('remote');
-var dialog = remote.require('dialog');
-var recursive = remote.require('recursive-readdir');
-var fs = remote.require('fs');
+const ipc = window.require('electron').ipcRenderer;
+const remote = window.require('remote');
+const dialog = remote.require('dialog');
+const recursive = remote.require('recursive-readdir');
+const fs = remote.require('fs');
 
 import FileList from './file-list.jsx';
 import Transforms from './transforms.jsx';
@@ -20,19 +20,19 @@ import clearFiles from '../actions/clear-files';
 import renameFiles from '../actions/rename-files';
 import changePosition from '../actions/change-position';
 
-import { formatFilesFromPath } from '../utils/file-formatter';
+import {formatFilesFromPath} from '../utils/file-formatter';
 
-ipc.on('error', (event, err)=> {
+ipc.on('error', (event, err) => {
 	console.error(err);
 	dialog.showErrorBox('Something went wrong', err);
 });
 
-ipc.on('file-write-success', (event, fileCount)=> {
+ipc.on('file-write-success', (event, fileCount) => {
 	dialog.showMessageBox({
 		type: 'info',
-		message: 'Wrote ' + fileCount + ' files',
-		buttons: ["OK"]
-	})
+		message: `Wrote ${fileCount} files`,
+		buttons: ['OK']
+	});
 });
 
 const App = React.createClass({
@@ -42,24 +42,24 @@ const App = React.createClass({
 	},
 	handleAddFiles(files) {
 		this.props.dispatch(clearFiles());
-		files.forEach((file)=> {
-			fs.stat(file.path, (err, stats)=> {
+		files.forEach((file) => {
+			fs.stat(file.path, (err, stats) => {
 				if (stats.isDirectory()) {
-					recursive(file.path, ['.*'], (err, files)=> {
+					recursive(file.path, ['.*'], (err, files) => {
 						formatFilesFromPath(files).forEach(this.dispatchAddFile);
 					});
 				} else {
 					this.dispatchAddFile((file));
 				}
 			});
-		})
+		});
 	},
 	handleAddTransform() {
 		this.props.dispatch(addTransform());
 		this.props.dispatch(renameFiles());
 	},
 	handleRemoveTransform(index) {
-		this.props.dispatch(removeTransform(index))
+		this.props.dispatch(removeTransform(index));
 		this.props.dispatch(renameFiles());
 	},
 	handleChangeTransform(transform) {
@@ -77,19 +77,20 @@ const App = React.createClass({
 				<Header onAddFiles={this.handleAddFiles} files={files} />
 				<div className="window-content">
 					<div className="pane-group">
-						<FileList onAddFiles={this.handleAddFiles} files={files} onClearClick={()=> dispatch(clearFiles())} />
+						<FileList onAddFiles={this.handleAddFiles} files={files} onClearClick={() => dispatch(clearFiles())} />
 						<Transforms transforms={transforms}
 							onAddTransform={this.handleAddTransform}
 							onChangeTransform={this.handleChangeTransform}
 							onRemoveTransform={this.handleRemoveTransform}
-							onPositionChange={this.handlePositionChange} />
+							onPositionChange={this.handlePositionChange}
+							/>
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
-})
+});
 
-const select = state => state;
+const select = (state) => state;
 
 export default connect(select)(App);

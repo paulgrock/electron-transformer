@@ -1,8 +1,8 @@
 export default {
-	"lower-case": {
-		name: "Lower Case",
-		method: function(str) {
+	'lower-case': {
+		name: 'Lower Case',
+		method(str) {
 			return str.toLowerCase();
 		}
 	}
-}
+};

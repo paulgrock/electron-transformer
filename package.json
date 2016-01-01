@@ -48,13 +48,20 @@
     "underscore.string": "^3.2.2"
   },
   "devDependencies": {
+    "babel-eslint": "^4.1.6",
     "babelify": "^7.2.0",
     "browserify": "^12.0.1",
     "chai": "^3.4.1",
     "electron-packager": "^5.0.0",
     "electron-prebuilt": "^0.36.1",
+    "eslint-config-airbnb": "^2.1.1",
+    "eslint-config-xo": "^0.9.1",
+    "eslint-config-xo-react": "^0.3.0",
+    "eslint-plugin-babel": "^3.0.0",
+    "eslint-plugin-react": "^3.13.1",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^1.1.1",
     "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-task-loader": "^1.2.3",
@@ -66,12 +73,5 @@
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.6.0",
     "xo": "^0.10.0"
-  },
-  "xo": {
-    "esnext": true,
-    "envs": [
-      "node",
-      "browser"
-    ]
   }
 }

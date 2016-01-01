@@ -1,7 +1,7 @@
-import { CLEAR_FILES } from './types';
+import {CLEAR_FILES} from './types';
 
-export default function() {
+export default function () {
 	return {
 		type: CLEAR_FILES
-	}
+	};
 }

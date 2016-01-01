@@ -1,19 +1,19 @@
-var ipc = window.require("electron").ipcRenderer;
+const ipc = window.require('electron').ipcRenderer;
 import React from 'react';
 import openDialog from '../utils/open-dialog';
 import saveDialog from '../utils/save-dialog';
-import { formatFilesFromPath } from '../utils/file-formatter';
+import {formatFilesFromPath} from '../utils/file-formatter';
 
 export default (Wrapped) => React.createClass({
-	componentWillMount: function() {
-		ipc.on('new-files', (event, files) => this.addFiles(files) );
+	componentWillMount() {
+		ipc.on('new-files', (event, files) => this.addFiles(files));
 	},
-	addFiles: function(files) {
-		var formattedFiles = formatFilesFromPath(files);
+	addFiles(files) {
+		const formattedFiles = formatFilesFromPath(files);
 		this.props.onAddFiles(formattedFiles);
 	},
 	handleAddFiles() {
-		openDialog(null, (err, files)=>{
+		openDialog(null, (err, files) => {
 			if (err) {
 				return console.error(err);
 			}
@@ -27,11 +27,11 @@ export default (Wrapped) => React.createClass({
 				return console.error(err);
 			}
 			ipc.send('write-files', files);
-		})
+		});
 	},
 	render() {
 		return (
 			<Wrapped {...this.props} handleAddFiles={this.handleAddFiles} handleSaveFiles={this.handleSaveFiles} {...this.state} />
-		)
+		);
 	}
 });

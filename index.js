@@ -2,7 +2,7 @@
 
 const app = require('app');
 const BrowserWindow = require('browser-window');
-const ipc = require("electron").ipcMain;
+const ipc = require('electron').ipcMain;
 const fs = require('fs');
 const path = require('path');
 const Menu = require('menu');
@@ -27,37 +27,37 @@ function createMainWindow() {
 	const win = new BrowserWindow({
 		width: 1200,
 		height: 800,
-		"title-bar-style": 'hidden',
+		'title-bar-style': 'hidden',
 		title: 'Transformer'
 	});
 
 	win.loadURL(`file://${__dirname}/index.html`);
 	win.on('closed', onClosed);
-	win.on('blur', function() {
+	win.on('blur', () => {
 		win.webContents.send('lost-focus');
 	});
-	win.on('focus', function() {
+	win.on('focus', () => {
 		win.webContents.send('gained-focus');
 	});
 
-	var template = [
+	const template = [
 		{
 			label: 'File',
 			submenu: [
 				{
 					label: 'Open',
 					accelerator: 'CmdOrCtrl+O',
-					click: function() {
+					click() {
 						const options = {
 							title: 'Add files to be transmformed',
-					    properties: ['openFile', 'openDirectory', 'multiSelections']
+							properties: ['openFile', 'openDirectory', 'multiSelections']
 						};
-						dialog.showOpenDialog(win, options, function(files) {
+						dialog.showOpenDialog(win, options, (files) => {
 							if (files == null) {
 								return;
 							}
 							win.webContents.send('new-files', files);
-						})
+						});
 					}
 				}
 			]
@@ -97,7 +97,7 @@ function createMainWindow() {
 					label: 'Select All',
 					accelerator: 'CmdOrCtrl+A',
 					role: 'selectall'
-				},
+				}
 			]
 		},
 		{
@@ -106,37 +106,40 @@ function createMainWindow() {
 				{
 					label: 'Reload',
 					accelerator: 'CmdOrCtrl+R',
-					click: function(item, focusedWindow) {
-						if (focusedWindow)
+					click(item, focusedWindow) {
+						if (focusedWindow) {
 							focusedWindow.reload();
+						}
 					}
 				},
 				{
 					label: 'Toggle Full Screen',
-					accelerator: (function() {
-						if (process.platform == 'darwin')
+					accelerator: (function () {
+						if (process.platform === 'darwin') {
 							return 'Ctrl+Command+F';
-						else
-							return 'F11';
+						}
+						return 'F11';
 					})(),
-					click: function(item, focusedWindow) {
-						if (focusedWindow)
+					click(item, focusedWindow) {
+						if (focusedWindow) {
 							focusedWindow.setFullScreen(!focusedWindow.isFullScreen());
+						}
 					}
 				},
 				{
 					label: 'Toggle Developer Tools',
-					accelerator: (function() {
-						if (process.platform == 'darwin')
+					accelerator: (function () {
+						if (process.platform === 'darwin') {
 							return 'Alt+Command+I';
-						else
-							return 'Ctrl+Shift+I';
+						}
+						return 'Ctrl+Shift+I';
 					})(),
-					click: function(item, focusedWindow) {
-						if (focusedWindow)
+					click(item, focusedWindow) {
+						if (focusedWindow) {
 							focusedWindow.toggleDevTools();
+						}
 					}
-				},
+				}
 			]
 		},
 		{
@@ -152,22 +155,22 @@ function createMainWindow() {
 					label: 'Close',
 					accelerator: 'CmdOrCtrl+W',
 					role: 'close'
-				},
+				}
 			]
 		},
 		{
 			label: 'Help',
 			role: 'help'
-		},
+		}
 	];
 
-	if (process.platform == 'darwin') {
-		var name = app.getName();
+	if (process.platform === 'darwin') {
+		const name = app.getName();
 		template.unshift({
 			label: name,
 			submenu: [
 				{
-					label: 'About ' + name,
+					label: `About ${name}`,
 					role: 'about'
 				},
 				{
@@ -182,7 +185,7 @@ function createMainWindow() {
 					type: 'separator'
 				},
 				{
-					label: 'Hide ' + name,
+					label: `Hide ${name}`,
 					accelerator: 'Command+H',
 					role: 'hide'
 				},
@@ -201,8 +204,10 @@ function createMainWindow() {
 				{
 					label: 'Quit',
 					accelerator: 'Command+Q',
-					click: function() { app.quit(); }
-				},
+					click() {
+						app.quit();
+					}
+				}
 			]
 		});
 		// Window menu.
@@ -217,20 +222,20 @@ function createMainWindow() {
 		);
 	}
 
-	var menu = Menu.buildFromTemplate(template);
+	const menu = Menu.buildFromTemplate(template);
 	Menu.setApplicationMenu(menu);
 
 	return win;
 }
 
-ipc.on('write-files', function(event, files) {
-	var timesCalled = 0;
-	files.forEach(function(file) {
+ipc.on('write-files', (event, files) => {
+	let timesCalled = 0;
+	files.forEach((file) => {
 		const completeOldPath = path.join(file.path, file.originalFileName);
 		const completeNewPath = path.join(file.path, file.updatedFileName);
-		fs.rename(completeOldPath, completeNewPath, function(err) {
+		fs.rename(completeOldPath, completeNewPath, (err) => {
 			if (err) {
-			  event.sender.send('error', err);
+				event.sender.send('error', err);
 				return console.error(err);
 			}
 			timesCalled += 1;

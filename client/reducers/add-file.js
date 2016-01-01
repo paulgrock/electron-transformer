@@ -1,8 +1,8 @@
-import { ADD_FILE } from '../actions/types';
+import {ADD_FILE} from '../actions/types';
 const initialState = {
 	files: [],
 	transforms: []
-}
+};
 
 export default function addFile(state = initialState, action) {
 	switch (action.type) {
@@ -16,7 +16,8 @@ export default function addFile(state = initialState, action) {
 						updatedFileName: action.updatedFileName
 					}
 				]
-			})
+			});
+
 		default:
 			return state;
 	}

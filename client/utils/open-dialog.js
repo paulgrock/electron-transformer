@@ -1,16 +1,16 @@
-var remote = window.require('remote');
-var dialog = remote.require('dialog');
+const remote = window.require('remote');
+const dialog = remote.require('dialog');
 
-export default function(window, cb) {
+export default (window, cb) => {
 	const options = {
 		title: 'Add files to be transmformed',
 		properties: ['openFile', 'openDirectory', 'multiSelections']
 	};
 
-	dialog.showOpenDialog(window, options, function(files) {
+	dialog.showOpenDialog(window, options, (files) => {
 		if (files == null) {
 			return cb(new Error('No Files'));
 		}
 		cb(null, files);
 	});
-}
+};

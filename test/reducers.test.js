@@ -1,9 +1,9 @@
-import { expect } from 'chai';
+import {expect} from 'chai';
 import reducers from '../client/reducers';
 
 describe('Reducers', () => {
-	describe('No state', ()=> {
-		it('Passing undefined state returns the initial state', ()=> {
+	describe('No state', () => {
+		it('Passing undefined state returns the initial state', () => {
 			const initialState = {
 				files: [],
 				transforms: []
@@ -13,8 +13,8 @@ describe('Reducers', () => {
 		});
 	});
 
-	describe('Random aciton type', ()=> {
-		it('Returns the initial state', ()=> {
+	describe('Random aciton type', () => {
+		it('Returns the initial state', () => {
 			const initialState = {
 				files: [],
 				transforms: []
@@ -26,14 +26,15 @@ describe('Reducers', () => {
 		});
 	});
 
-	describe('Add File', ()=> {
-		it('Adding a file returns a new state', ()=> {
+	describe('Add File', () => {
+		it('Adding a file returns a new state', () => {
 			const action = {
-				type: "ADD_FILE",
+				type: 'ADD_FILE',
 				originalFileName: './bar/foo.js',
 				path: './bar.js',
 				updatedFileName: './bar/FOO.js'
-			}
+			};
+
 			const modifiedState = reducers(undefined, action);
 			const newState = {
 				files: [
@@ -44,15 +45,16 @@ describe('Reducers', () => {
 					}
 				],
 				transforms: []
-			}
+			};
+
 			expect(modifiedState).to.deep.equal(newState);
-		})
+		});
 	});
 
-	describe('Add Transform', ()=> {
-		it('To empty state', ()=> {
+	describe('Add Transform', () => {
+		it('To empty state', () => {
 			const action = {
-				type: "ADD_TRANSFORM",
+				type: 'ADD_TRANSFORM',
 				style: './bar/foo.js',
 				args: {}
 			};
@@ -63,23 +65,25 @@ describe('Reducers', () => {
 					style: './bar/foo.js',
 					args: {}
 				}]
-			}
-			expect(modifiedState).to.deep.equal(newState);
-		})
+			};
 
-		it('To preexisting a state', ()=> {
+			expect(modifiedState).to.deep.equal(newState);
+		});
+
+		it('To preexisting a state', () => {
 			const action = {
-				type: "ADD_TRANSFORM",
+				type: 'ADD_TRANSFORM',
 				style: './bar/foo.js',
 				args: {}
 			};
 			const newAction = {
-				type: "ADD_TRANSFORM",
+				type: 'ADD_TRANSFORM',
 				style: 'upper-case',
 				args: {}
-			}
+			};
+
 			const modifiedState = reducers(undefined, action);
-			const updatedState = reducers(modifiedState, newAction)
+			const updatedState = reducers(modifiedState, newAction);
 			const newState = {
 				files: [],
 				transforms: [
@@ -93,53 +97,53 @@ describe('Reducers', () => {
 						args: {}
 					}
 				]
-			}
+			};
 			expect(updatedState).to.deep.equal(newState);
-		})
+		});
 	});
 
-	describe('Change Transform', ()=> {
-		it('Modifies transform', ()=> {
+	describe('Change Transform', () => {
+		it('Modifies transform', () => {
 			const state = {
 				files: [],
 				transforms: [
 					{
-						style: "upper-case",
+						style: 'upper-case',
 						args: {}
 					},
 					{
-						style: "humanize",
+						style: 'humanize',
 						args: {}
 					}
 				]
-			}
+			};
 
 			const action = {
-				type: "CHANGE_TRANSFORM",
+				type: 'CHANGE_TRANSFORM',
 				index: 1,
-				style: "remove-characters",
+				style: 'remove-characters',
 				args: {
 					from: 'start',
 					amount: 3
 				}
-			}
+			};
 
 			const newState = {
 				files: [],
 				transforms: [
 					{
-						style: "upper-case",
+						style: 'upper-case',
 						args: {}
 					},
 					{
-						style: "remove-characters",
+						style: 'remove-characters',
 						args: {
 							from: 'start',
 							amount: 3
 						}
 					}
 				]
-			}
+			};
 
 			const modifiedState = reducers(state, action);
 
@@ -147,47 +151,47 @@ describe('Reducers', () => {
 		});
 	});
 
-	describe('Remove Transform', ()=> {
-		it('Removes transform', ()=> {
+	describe('Remove Transform', () => {
+		it('Removes transform', () => {
 			const state = {
 				files: [],
 				transforms: [
 					{
-						style: "upper-case",
+						style: 'upper-case',
 						args: {}
 					},
 					{
-						style: "humanize",
+						style: 'humanize',
 						args: {}
 					}
 				]
-			}
+			};
 
 			const action = {
-				type: "REMOVE_TRANSFORM",
+				type: 'REMOVE_TRANSFORM',
 				index: 1
-			}
+			};
 
 			const newState = {
 				files: [],
 				transforms: [
 					{
-						style: "upper-case",
+						style: 'upper-case',
 						args: {}
 					}
 				]
-			}
+			};
 
 			const modifiedState = reducers(state, action);
 			expect(modifiedState).to.deep.equal(newState);
 		});
 	});
 
-	describe('Rename Files', ()=> {
-		it('Renames all files with a single transform with no args', ()=> {
+	describe('Rename Files', () => {
+		it('Renames all files with a single transform with no args', () => {
 			const action = {
-				type: "RENAME_FILES"
-			}
+				type: 'RENAME_FILES'
+			};
 			const state = {
 				files: [
 					{
@@ -208,11 +212,11 @@ describe('Reducers', () => {
 				],
 				transforms: [
 					{
-						style: "upper-case",
+						style: 'upper-case',
 						args: {}
 					}
 				]
-			}
+			};
 			const modifiedState = reducers(state, action);
 			const newState = {
 				files: [
@@ -234,18 +238,18 @@ describe('Reducers', () => {
 				],
 				transforms: [
 					{
-						style: "upper-case",
+						style: 'upper-case',
 						args: {}
 					}
 				]
-			}
+			};
 			expect(modifiedState).to.deep.equal(newState);
-		})
+		});
 
-		it('Renames all files with a single transforms with args', ()=> {
+		it('Renames all files with a single transforms with args', () => {
 			const action = {
-				type: "RENAME_FILES"
-			}
+				type: 'RENAME_FILES'
+			};
 			const state = {
 				files: [
 					{
@@ -266,14 +270,14 @@ describe('Reducers', () => {
 				],
 				transforms: [
 					{
-						style: "remove-characters",
+						style: 'remove-characters',
 						args: {
-							from: "end",
+							from: 'end',
 							amount: 2
 						}
 					}
 				]
-			}
+			};
 			const modifiedState = reducers(state, action);
 			const newState = {
 				files: [
@@ -295,21 +299,21 @@ describe('Reducers', () => {
 				],
 				transforms: [
 					{
-						style: "remove-characters",
+						style: 'remove-characters',
 						args: {
-							from: "end",
+							from: 'end',
 							amount: 2
 						}
 					}
 				]
-			}
+			};
 			expect(modifiedState).to.deep.equal(newState);
-		})
+		});
 
-		it('Renames all files with multiple transforms in order', ()=> {
+		it('Renames all files with multiple transforms in order', () => {
 			const action = {
-				type: "RENAME_FILES"
-			}
+				type: 'RENAME_FILES'
+			};
 			const state = {
 				files: [
 					{
@@ -330,18 +334,19 @@ describe('Reducers', () => {
 				],
 				transforms: [
 					{
-						style: "upper-case",
+						style: 'upper-case',
 						args: {}
 					},
 					{
-						style: "remove-characters",
+						style: 'remove-characters',
 						args: {
-							from: "end",
+							from: 'end',
 							amount: 2
 						}
 					}
 				]
-			}
+			};
+
 			const modifiedState = reducers(state, action);
 			const newState = {
 				files: [
@@ -363,27 +368,28 @@ describe('Reducers', () => {
 				],
 				transforms: [
 					{
-						style: "upper-case",
+						style: 'upper-case',
 						args: {}
 					},
 					{
-						style: "remove-characters",
+						style: 'remove-characters',
 						args: {
-							from: "end",
+							from: 'end',
 							amount: 2
 						}
 					}
 				]
-			}
+			};
 			expect(modifiedState).to.deep.equal(newState);
-		})
+		});
 	});
 
-	describe('Clear Files', ()=> {
-		it('Removes all files', ()=> {
+	describe('Clear Files', () => {
+		it('Removes all files', () => {
 			const action = {
-				type: "CLEAR_FILES"
-			}
+				type: 'CLEAR_FILES'
+			};
+
 			const state = {
 				files: [
 					{
@@ -403,13 +409,13 @@ describe('Reducers', () => {
 					}
 				],
 				transforms: []
-			}
+			};
 			const modifiedState = reducers(state, action);
 			const newState = {
 				files: [],
 				transforms: []
-			}
+			};
 			expect(modifiedState).to.deep.equal(newState);
-		})
+		});
 	});
 });

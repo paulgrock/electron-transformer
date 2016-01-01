@@ -1,8 +1,8 @@
-var gulp = require('gulp');
-var compile = require('../libs/compile-js');
+import gulp from 'gulp';
+import compile from '../libs/compile-js';
 
-module.exports = function() {
-	gulp.task('watchify', function() {
+module.exports = () => {
+	gulp.task('watchify', () => {
 		compile(true);
 	});
-}
+};

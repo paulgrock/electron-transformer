@@ -1,24 +1,19 @@
-var gulp = require('gulp');
-var babelify = require('babelify');
-var browserify = require('browserify');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-var sourcemaps = require('gulp-sourcemaps');
-var watchify = require('watchify');
-var file = 'index.js';
-var uglify = require('gulp-uglify')
-var firstTime = true;
+import gulp from 'gulp';
+import babelify from 'babelify';
+import browserify from 'browserify';
+import source from 'vinyl-source-stream';
+import watchify from 'watchify';
+const file = 'index.js';
 
-
-var handleErrors = function(err) {
+const handleErrors = (err) => {
 	console.error(err);
 };
 
-var compile = function(watch) {
+const compile = function (watch) {
 	console.time('Browserify Update');
 
-  var bundler = browserify({
-		entries: ['./client/' + file],
+	const bundler = browserify({
+		entries: [`./client/${file}`],
 		debug: true,
 		transform: [babelify]
 	});
@@ -28,21 +23,21 @@ var compile = function(watch) {
 	}
 
 	function rebundle() {
-    var stream = bundler.bundle();
+		const stream = bundler.bundle();
 		return stream
-			.on('end', function() {
-				console.timeEnd('Browserify Update')
+			.on('end', () => {
+				console.timeEnd('Browserify Update');
 			})
 			.on('error', handleErrors)
 			.pipe(source('build.js'))
 			.pipe(gulp.dest('./dist/'));
-  }
+	}
 
-  // listen for an update and run rebundle
-  bundler.on('update', function() {
-    rebundle();
+	// listen for an update and run rebundle
+	bundler.on('update', () => {
+		rebundle();
 		console.time('Browserify Update');
-  });
+	});
 	return rebundle();
 };
 

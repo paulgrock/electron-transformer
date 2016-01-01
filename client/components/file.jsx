@@ -5,4 +5,4 @@ export default ({file}) => (
 		<td>{file.originalFileName}</td>
 		<td>{file.updatedFileName}</td>
 	</tr>
-)
+);

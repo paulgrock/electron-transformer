@@ -1,6 +1,6 @@
-import { REMOVE_TRANSFORM } from './types';
+import {REMOVE_TRANSFORM} from './types';
 
-export default (index)=> ({
+export default (index) => ({
 	type: REMOVE_TRANSFORM,
-	index: index
-})
+	index
+});

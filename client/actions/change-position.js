@@ -1,6 +1,6 @@
-import { CHANGE_POSITION } from './types';
+import {CHANGE_POSITION} from './types';
 
-export default (previousPosition, newPosition)=> ({
+export default (previousPosition, newPosition) => ({
 	type: CHANGE_POSITION,
 	previousPosition,
 	newPosition

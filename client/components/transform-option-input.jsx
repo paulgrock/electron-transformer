@@ -1,13 +1,13 @@
 import React from 'react';
 
 export default (props) => {
-	let { style, name } = props.option;
+	const {style, name} = props.option;
 	let placeholder;
-	if (style === "number") {
+	if (style === 'number') {
 		placeholder = 0;
 	}
 
 	return (
 		<input type={style} name={name} placeholder={placeholder} className="form-control" onChange={props.handleChange} value={props.transform.args[name]} />
 	);
-}
+};
