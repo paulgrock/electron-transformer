@@ -29,11 +29,13 @@ $dark-button-bottom-active-color: $jaguar;
 }
 
 .sidebar {
-	background-color: $bokara-gray;
-	border-right: 1px solid $toolbar-separator-color;
-	box-shadow: inset -1px 0 $tuatara;
-	max-width: 250px;
 	width: 20%;
+	max-width: 250px;
+
+	border-right: 1px solid $toolbar-separator-color;
+	background-color: $bokara-gray;
+	box-shadow: inset -1px 0 $tuatara;
+
 	order: -1;
 }
 
@@ -88,9 +90,10 @@ tbody {
 }
 
 .list-group-item + .list-group-item {
+	margin-right: 1px;
+
 	border-top-color: $toolbar-separator-color;
 	box-shadow: inset 0 1px $tuatara;
-	margin-right: 1px;
 }
 
 .add-more-transforms {
