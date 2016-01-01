@@ -1,6 +1,6 @@
 import React from 'react';
 import Transform from './transform.jsx';
-import dragula from 'react-dragula';
+import Button from './button.jsx';
 
 const TransformList =  React.createClass({
 	handleAddTransform: function(e) {
@@ -8,7 +8,6 @@ const TransformList =  React.createClass({
 		this.props.onAddTransform()
 	},
 	render() {
-		console.log(this.props);
 		var transformList = this.props.transforms.map((transform, idx)=> {
 			return <Transform key={idx} {...this.props} index={idx} transform={transform} />
 		})
@@ -21,9 +20,7 @@ const TransformList =  React.createClass({
 					{transformList}
 				</ul>
 				<div className="padded-more">
-					<button className="btn btn-dark" onClick={this.handleAddTransform}>
-						<span className="icon icon-plus"></span>
-					</button>
+					<Button type="plus" handler={this.handleAddTransform} />
 				</div>
 			</aside>
 		)

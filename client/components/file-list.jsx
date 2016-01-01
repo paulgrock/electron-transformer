@@ -4,6 +4,7 @@ import File from './file.jsx';
 import { formatFileProperties, formatFilesFromPath } from '../utils/file-formatter';
 import openDialog from '../utils/open-dialog';
 import saveDialog from '../utils/save-dialog';
+import Button from './button.jsx';
 
 export default React.createClass({
 	addFiles: function(files) {
@@ -54,12 +55,8 @@ export default React.createClass({
 					</tbody>
 				</table>
 				<div className="btn-group padded-top-more pull-right">
-					<button className="btn btn-dark" onClick={this.handleAddFiles}>
-						<span className="icon icon-folder"></span>
-					</button>
-					<button className="btn btn-dark" onClick={this.handleSaveFiles}>
-						<span className="icon icon-floppy"></span>
-					</button>
+					<Button type="folder" handler={this.handleAddFiles} />
+					<Button type="floppy" handler={this.handleSaveFiles} />
 					<button className="btn btn-dark" onClick={this.props.onClearClick}>
 						Clear
 					</button>

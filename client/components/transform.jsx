@@ -3,6 +3,7 @@ import TransformOptionInput from './transform-option-input.jsx'
 import TransformOptionSelect from './transform-option-select.jsx'
 import transformList from '../transforms/list';
 import { DragSource, DropTarget } from 'react-dnd';
+import Button from './button.jsx';
 
 var transformSource = {
 	beginDrag: function (props) {
@@ -35,6 +36,9 @@ const collectDrop = (connect, monitor) =>{
 };
 
 const Transform =  React.createClass({
+	changeStyle() {
+
+	},
 	handleStyleChange(e) {
 		const transformName = e.target.value
 		const opts = transformList[transformName].options;
@@ -84,7 +88,7 @@ const Transform =  React.createClass({
 		}
 
 		return connectDropTarget(connectDragSource(
-			<li className="list-group-item" data-position={this.props.index} style={{
+			<li className="list-group-item" style={{
         opacity: isDragging ? 0.5 : 1}}>
 				<form ref="transform-form">
 					<select name="transform-type" ref="transform-type" className="form-control" value={transform.style}  onChange={this.handleStyleChange}>
@@ -92,9 +96,7 @@ const Transform =  React.createClass({
 					</select>
 					{AdditionalTransformOptions}
 				</form>
-				<button onClick={this.handleRemove} className="btn btn-dark">
-					<span className="icon icon-minus"></span>
-				</button>
+				<Button type="minus" handler={this.handleRemove} />
 			</li>
 		))
 	}

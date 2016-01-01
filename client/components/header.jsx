@@ -3,6 +3,7 @@ import React from 'react';
 import openDialog from '../utils/open-dialog';
 import saveDialog from '../utils/save-dialog';
 import { formatFilesFromPath } from '../utils/file-formatter';
+import Button from './button.jsx';
 
 export default React.createClass({
 	addFiles: function(files) {
@@ -32,12 +33,8 @@ export default React.createClass({
 				<h1 className="title">Transformer</h1>
 				<div className="toolbar-actions">
 					<div className="btn-group">
-						<button className="btn btn-default" onClick={this.handleAddFiles}>
-							<span className="icon icon-folder"></span>
-						</button>
-						<button className="btn btn-default" onClick={this.handleSaveFiles}>
-							<span className="icon icon-floppy"></span>
-						</button>
+						<Button type="folder" handler={this.handleAddFiles} color="default" />
+						<Button type="floppy" handler={this.handleSaveFiles} color="default" />
 					</div>
 				</div>
 			</header>
