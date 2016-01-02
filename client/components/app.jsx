@@ -17,7 +17,6 @@ import addTransform from '../actions/add-transform';
 import changeTransform from '../actions/change-transform';
 import removeTransform from '../actions/remove-transform';
 import clearFiles from '../actions/clear-files';
-import renameFiles from '../actions/rename-files';
 import changePosition from '../actions/change-position';
 
 import {formatFilesFromPath} from '../utils/file-formatter';
@@ -38,7 +37,6 @@ ipc.on('file-write-success', (event, fileCount) => {
 const App = React.createClass({
 	dispatchAddFile(file) {
 		this.props.dispatch(addFile(file));
-		this.props.dispatch(renameFiles());
 	},
 	handleAddFiles(files) {
 		this.props.dispatch(clearFiles());
@@ -56,19 +54,15 @@ const App = React.createClass({
 	},
 	handleAddTransform() {
 		this.props.dispatch(addTransform());
-		this.props.dispatch(renameFiles());
 	},
 	handleRemoveTransform(index) {
 		this.props.dispatch(removeTransform(index));
-		this.props.dispatch(renameFiles());
 	},
 	handleChangeTransform(transform) {
 		this.props.dispatch(changeTransform(transform));
-		this.props.dispatch(renameFiles());
 	},
 	handlePositionChange(previousPosition, newPosition) {
 		this.props.dispatch(changePosition(previousPosition, newPosition));
-		this.props.dispatch(renameFiles());
 	},
 	render() {
 		const {dispatch, files, transforms} = this.props;
