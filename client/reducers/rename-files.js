@@ -1,10 +1,7 @@
 import {RENAME_FILES} from '../actions/types';
-const initialState = {
-	files: [],
-	transforms: []
-};
+import renameFile from '../rename-file';
 
-export default function (state = initialState, action) {
+export default function (state, action) {
 	switch (action.type) {
 		case RENAME_FILES: {
 			const updatedFiles = state.files.map((file) => {
