@@ -32,7 +32,7 @@ describe('Reducers', () => {
 				type: 'ADD_FILE',
 				originalFileName: './bar/foo.js',
 				path: './bar.js',
-				updatedFileName: './bar/FOO.js'
+				updatedFileName: 'foo.js'
 			};
 
 			const modifiedState = reducers(undefined, action);
@@ -41,11 +41,14 @@ describe('Reducers', () => {
 					{
 						originalFileName: './bar/foo.js',
 						path: './bar.js',
-						updatedFileName: './bar/FOO.js'
+						updatedFileName: 'foo.js'
 					}
 				],
 				transforms: []
 			};
+
+			console.log(modifiedState);
+			console.log(newState);
 
 			expect(modifiedState).to.deep.equal(newState);
 		});
