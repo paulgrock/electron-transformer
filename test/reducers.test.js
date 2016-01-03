@@ -47,9 +47,6 @@ describe('Reducers', () => {
 				transforms: []
 			};
 
-			console.log(modifiedState);
-			console.log(newState);
-
 			expect(modifiedState).to.deep.equal(newState);
 		});
 	});
@@ -417,6 +414,51 @@ describe('Reducers', () => {
 			const newState = {
 				files: [],
 				transforms: []
+			};
+			expect(modifiedState).to.deep.equal(newState);
+		});
+	});
+
+	describe('Change position', () => {
+		it('Transforms change position', () => {
+			const action = {
+				type: 'CHANGE_POSITION',
+				previousPosition: 1,
+				newPosition: 0
+			};
+
+			const state = {
+				files: [],
+				transforms: [
+					{
+						style: 'upper-case',
+						args: {}
+					},
+					{
+						style: 'remove-characters',
+						args: {
+							from: 'end',
+							amount: 2
+						}
+					}
+				]
+			};
+			const modifiedState = reducers(state, action);
+			const newState = {
+				files: [],
+				transforms: [
+					{
+						style: 'remove-characters',
+						args: {
+							from: 'end',
+							amount: 2
+						}
+					},
+					{
+						style: 'upper-case',
+						args: {}
+					}
+				]
 			};
 			expect(modifiedState).to.deep.equal(newState);
 		});
