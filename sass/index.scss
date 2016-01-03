@@ -83,17 +83,34 @@ tbody {
 }
 
 .list-group-item {
-	border-top-color: transparent;
+	margin-right: 1px;
+	padding: 8px;
+
+	border: 2px dashed transparent;
+	border-top-color: $toolbar-separator-color;
+	box-shadow: inset 0 1px $tuatara;
+	&:hover {
+		cursor: move;
+	}
 	input {
 		display: block;
 	}
+	&.is-moving {
+		opacity: 0.5;
+	}
+	&.is-over {
+		border-color: green;
+	}
 }
 
-.list-group-item + .list-group-item {
-	margin-right: 1px;
+.list-group-item,
+.list-group-header {
+	display: flex;
+	justify-content: space-between;
+}
 
-	border-top-color: $toolbar-separator-color;
-	box-shadow: inset 0 1px $tuatara;
+[draggable] {
+	-webkit-user-select: none;
 }
 
 .add-more-transforms {
@@ -101,5 +118,5 @@ tbody {
 }
 
 .minus-button-container {
-	margin-top: 5px;
+	margin-left: 5px;
 }

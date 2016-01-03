@@ -4,7 +4,7 @@ import {DragSource, DropTarget} from 'react-dnd';
 import TransformForm from './transform-form.jsx';
 import Button from './button.jsx';
 
-const transformSource = {
+const specDrag = {
 	beginDrag(props) {
 		return {
 			transformId: props.index
@@ -19,7 +19,7 @@ const collectDrag = (connect, monitor) => {
 	};
 };
 
-const dropTarget = {
+const specDrop = {
 	drop(props, monitor) {
 		const previousPosition = monitor.getItem().transformId;
 		const newPosition = props.index;
@@ -39,9 +39,11 @@ const Transform = React.createClass({
 		this.props.onRemoveTransform(this.props.index);
 	},
 	render() {
-		const {index, transform, onChangeTransform, connectDragSource, isDragging, connectDropTarget} = this.props;
+		const {index, transform, onChangeTransform, connectDragSource, isOver, isDragging, connectDropTarget} = this.props;
+		const draggingClass = isDragging ? ' is-moving' : '';
+		const overClass = isOver ? ' is-over' : '';
 		return connectDropTarget(connectDragSource(
-			<li className="list-group-item" style={{opacity: isDragging ? 0.5 : 1}}>
+			<li className={`list-group-item${draggingClass}${overClass}`}>
 				<TransformForm transform={transform} onChangeTransform={onChangeTransform} index={index} />
 				<div className="minus-button-container pull-right">
 					<Button type="minus" handler={this.handleRemove} />
@@ -51,4 +53,4 @@ const Transform = React.createClass({
 	}
 });
 
-export default DropTarget('TRANSFORM', dropTarget, collectDrop)(DragSource('TRANSFORM', transformSource, collectDrag)(Transform));
+export default DropTarget('TRANSFORM', specDrop, collectDrop)(DragSource('TRANSFORM', specDrag, collectDrag)(Transform));

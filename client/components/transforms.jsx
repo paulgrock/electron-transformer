@@ -2,7 +2,7 @@ import React from 'react';
 import Transform from './transform.jsx';
 import Button from './button.jsx';
 import {DragDropContext} from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import HTML5Backend from 'react-dnd-html5-mixed-backend';
 
 const TransformList = React.createClass({
 	handleAddTransform(e) {
@@ -18,12 +18,10 @@ const TransformList = React.createClass({
 				<ul className="list-group" ref="transform-list">
 					<li className="list-group-header">
 						<h4>Transforms</h4>
+						<Button type="plus" handler={this.handleAddTransform} />
 					</li>
 					{transformList}
 				</ul>
-				<div className="add-more-transforms">
-					<Button type="plus" handler={this.handleAddTransform} />
-				</div>
 			</aside>
 		);
 	}
