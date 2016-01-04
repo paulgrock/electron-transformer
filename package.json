@@ -5,10 +5,10 @@
   "version": "0.0.0",
   "description": "My groundbreaking app",
   "license": "MIT",
-  "repository": "paulgrock/elec-rename",
+  "repository": "paulgrock/electron-transformer",
   "author": {
-    "name": "",
-    "email": "",
+    "name": "Paul Grock",
+    "email": "paulgrock@gmail.com",
     "url": "paulgrock.com"
   },
   "engines": {
@@ -19,8 +19,7 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=$npm_package_electronVersion",
-    "test": "mocha --compilers js:babel-register,jsx:babel-register test/*.test.js",
-    "test:watch": "mocha --compilers js:babel-register,jsx:babel-register test/*.test.js -w",
+    "test": "gulp test",
     "coverage": "nyc --require babel-register npm test"
   },
   "files": [
@@ -70,12 +69,10 @@
     "gulp-task-loader": "^1.2.3",
     "gulp-uglify": "^1.5.1",
     "mocha": "^2.3.4",
-    "mocha-jsdom": "^1.0.0",
     "nyc": "^5.2.0",
     "uglify": "^0.1.5",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.6.0",
-    "xo": "^0.10.0"
+    "watchify": "^3.6.0"
   }
 }

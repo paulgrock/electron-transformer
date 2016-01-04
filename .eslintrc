@@ -5,6 +5,17 @@
 		"quote-props": [2, "as-needed"],
 		"eqeqeq": [2, "smart"],
 		"no-eq-null": 0,
-		"react/prop-types": 0
+		"react/prop-types": 0,
+		"new-cap": [2,
+			{
+				"capIsNewExceptions": [
+					"DragDropContext",
+					"DropTarget",
+					"DragSource",
+					"DialogHandler",
+					"Button"
+				]
+			}
+		]
 	}
 }

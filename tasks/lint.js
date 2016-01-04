@@ -5,7 +5,6 @@ module.exports = () => {
 	return gulp.src([
 		'**/*.js',
 		'**/*.jsx',
-		'**/*.json',
 		'!node_modules/**',
 		'!dist/**'
 	])

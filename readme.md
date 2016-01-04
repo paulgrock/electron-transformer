@@ -1,12 +1,13 @@
-# elec-rename
+# Electron Transformer
 
-> My groundbreaking app
+> An app for renaming files.
 
 
 ## Dev
 
 ```
 $ npm install
+$ gulp
 ```
 
 ### Run
@@ -15,14 +16,17 @@ $ npm install
 $ npm start
 ```
 
-### Build
+### Tests
 
 ```
-$ npm run build
+$ npm test
 ```
 
-Builds the app for OS X, Linux, and Windows, using [electron-packager](https://github.com/maxogden/electron-packager).
+### Test Coverage
 
+```
+$ npm run coverage
+```
 
 ## License
 
