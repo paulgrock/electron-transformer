@@ -15,10 +15,10 @@
     "node": ">=4"
   },
   "main": "bootstrapper",
-  "electronVersion": "0.34.1",
+  "electronVersion": "0.36.1",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=$npm_package_electronVersion",
+    "build": "electron-packager . $npm_package_productName --ignore='node_modules/(electron-packager|electron-prebuilt)' --prune --asar --platform=darwin --arch=x64 --version=$npm_package_electronVersion",
     "test": "gulp test",
     "coverage": "nyc --require babel-register npm test"
   },
@@ -54,7 +54,7 @@
     "babelify": "^7.2.0",
     "browserify": "^12.0.1",
     "chai": "^3.4.1",
-    "electron-packager": "^5.0.0",
+    "electron-packager": "^5.2.0",
     "electron-prebuilt": "^0.36.1",
     "eslint-config-airbnb": "^2.1.1",
     "eslint-config-xo": "^0.9.1",
