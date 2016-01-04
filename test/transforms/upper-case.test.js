@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import upperCase from '../client/transforms/upper-case';
+import upperCase from '../../client/transforms/upper-case';
 
 describe('Upper case', () => {
 	it('Converts a string to upper case', () => {
