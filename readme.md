@@ -28,6 +28,12 @@ $ npm test
 $ npm run coverage
 ```
 
+### Build (OS X only)
+
+```
+$ npm run build
+```
+
 ## License
 
 MIT © [](http://paulgrock.com)
