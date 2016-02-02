@@ -28,7 +28,11 @@ export default React.createClass({
 
 		return (
 			<form>
-				<select name="transform-type" className="form-control" value={transform.style} onChange={this.handleStyleChange}>
+                <span>
+                    {transformList[transform.style].name}
+                    <i className="fa fa-sort-desc" />    
+                </span>
+				<select name="transform-type" className="form-control select" value={transform.style} onChange={this.handleStyleChange}>
 					{TransformOptions}
 				</select>
 				<AdditionalTransformOptions index={index} transform={transform} handleChange={this.handleChange} selectedTransform={selectedTransform} />

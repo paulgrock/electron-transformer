@@ -4,7 +4,7 @@ import TransformOptionSelect from './transform-option-select.jsx';
 
 export default ({transform, handleChange, selectedTransform}) => {
 	if (selectedTransform.options == null) {
-		return <div />;
+		return <noscript />;
 	}
 
 	const AdditionalTransformOptionsList = selectedTransform.options.map((transformOption, index) => {

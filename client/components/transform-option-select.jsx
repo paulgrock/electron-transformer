@@ -11,7 +11,7 @@ export default (props) => {
 
 	return (
 		<div>
-			<select name={name} className="form-control" value={props.transform.args[name]} onChange={props.handleChange}>
+			<select name={name} className="form-control select" value={props.transform.args[name]} onChange={props.handleChange}>
 				{OptionList}
 			</select>
 		</div>
