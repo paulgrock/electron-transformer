@@ -39,6 +39,7 @@ describe('Reducers', () => {
 			const newState = {
 				files: [
 					{
+						id: "bar.js/bar/foo.js",
 						originalFileName: './bar/foo.js',
 						path: './bar.js',
 						updatedFileName: 'foo.js'
@@ -195,16 +196,19 @@ describe('Reducers', () => {
 			const state = {
 				files: [
 					{
+						id: "bar.js/bar/foo.js",
 						originalFileName: './bar/foo.js',
 						path: './bar.js',
 						updatedFileName: 'foo.js'
 					},
 					{
+						id: "bar.js/bar/foo.js",
 						originalFileName: './bar/foo.js',
 						path: './bar.js',
 						updatedFileName: 'foo.js'
 					},
 					{
+						id: "bar.js/bar/foo.js",
 						originalFileName: './bar/foo.js',
 						path: './bar.js',
 						updatedFileName: 'foo.js'
@@ -221,16 +225,19 @@ describe('Reducers', () => {
 			const newState = {
 				files: [
 					{
+						id: "bar.js/bar/foo.js",
 						originalFileName: './bar/foo.js',
 						path: './bar.js',
 						updatedFileName: 'FOO.js'
 					},
 					{
+						id: "bar.js/bar/foo.js",
 						originalFileName: './bar/foo.js',
 						path: './bar.js',
 						updatedFileName: 'FOO.js'
 					},
 					{
+						id: "bar.js/bar/foo.js",
 						originalFileName: './bar/foo.js',
 						path: './bar.js',
 						updatedFileName: 'FOO.js'
@@ -282,16 +289,19 @@ describe('Reducers', () => {
 			const newState = {
 				files: [
 					{
+						id: "bar.js/bar/foo.js",
 						originalFileName: './bar/foo.js',
 						path: './bar.js',
 						updatedFileName: 'f.js'
 					},
 					{
+						id: "bar.js/bar/foo.js",
 						originalFileName: './bar/foo.js',
 						path: './bar.js',
 						updatedFileName: 'f.js'
 					},
 					{
+						id: "bar.js/bar/foo.js",
 						originalFileName: './bar/foo.js',
 						path: './bar.js',
 						updatedFileName: 'f.js'
@@ -351,16 +361,19 @@ describe('Reducers', () => {
 			const newState = {
 				files: [
 					{
+						id: "bar.js/bar/foo.js",
 						originalFileName: './bar/foo.js',
 						path: './bar.js',
 						updatedFileName: 'F.js'
 					},
 					{
+						id: "bar.js/bar/foo.js",
 						originalFileName: './bar/foo.js',
 						path: './bar.js',
 						updatedFileName: 'F.js'
 					},
 					{
+						id: "bar.js/bar/foo.js",
 						originalFileName: './bar/foo.js',
 						path: './bar.js',
 						updatedFileName: 'F.js'

@@ -3,6 +3,7 @@ import File from './file.jsx';
 import {formatFileProperties} from '../utils/file-formatter';
 import Button from './button.jsx';
 import DialogHandler from './dialog-handler.jsx';
+import SortHeader from './sort-header.jsx';
 
 const FileList = React.createClass({
 	handleDrop(e) {
@@ -11,10 +12,10 @@ const FileList = React.createClass({
 		this.props.onAddFiles(fileList);
 	},
 	render() {
-		const {handleAddFiles, handleSaveFiles} = this.props;
+		const {handleAddFiles, handleSaveFiles, onSortFiles, onClearClick} = this.props;
 
 		const ListOfFiles = this.props.files.map((file) => {
-			return <File file={file} key={file.originalFileName} />;
+			return <File file={file} key={file.id} />;
 		});
 
 		return (
@@ -22,8 +23,8 @@ const FileList = React.createClass({
 				<table className="table-striped">
 					<thead>
 						<tr>
-							<th>Original File Name</th>
-							<th>New File Name</th>
+							<SortHeader text="Original" handleSort={onSortFiles} />
+							<SortHeader text="New" handleSort={onSortFiles} />
 						</tr>
 					</thead>
 					<tbody>
@@ -33,7 +34,7 @@ const FileList = React.createClass({
 				<div className="btn-group padded-more pull-right">
 					<Button type="folder" handler={handleAddFiles} />
 					<Button type="floppy" handler={handleSaveFiles} />
-					<button className="btn btn-dark" onClick={this.props.onClearClick}>
+					<button className="btn btn-dark" onClick={onClearClick}>
 						Clear
 					</button>
 				</div>

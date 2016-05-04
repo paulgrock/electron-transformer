@@ -17,6 +17,7 @@ import addTransform from '../actions/add-transform';
 import changeTransform from '../actions/change-transform';
 import removeTransform from '../actions/remove-transform';
 import clearFiles from '../actions/clear-files';
+import sortFiles from '../actions/sort-files';
 import changePosition from '../actions/change-position';
 
 import {formatFilesFromPath} from '../utils/file-formatter';
@@ -64,6 +65,9 @@ const App = React.createClass({
 	handlePositionChange(previousPosition, newPosition) {
 		this.props.dispatch(changePosition(previousPosition, newPosition));
 	},
+	handleSortFiles() {
+		this.props.dispatch(sortFiles('original'));
+	},
 	render() {
 		const {dispatch, files, transforms} = this.props;
 		return (
@@ -71,7 +75,7 @@ const App = React.createClass({
 				<Header onAddFiles={this.handleAddFiles} files={files} />
 				<div className="window-content">
 					<div className="pane-group">
-						<FileList onAddFiles={this.handleAddFiles} files={files} onClearClick={() => dispatch(clearFiles())} />
+						<FileList onAddFiles={this.handleAddFiles} files={files} onClearClick={() => dispatch(clearFiles())} onSortFiles={this.handleSortFiles}/>
 						<Transforms transforms={transforms}
 							onAddTransform={this.handleAddTransform}
 							onChangeTransform={this.handleChangeTransform}

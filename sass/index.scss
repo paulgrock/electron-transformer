@@ -78,7 +78,7 @@ tbody {
 }
 
 .btn-dark:active {
-  background-color: $dark-button-top-active-color;
+	background-color: $dark-button-top-active-color;
 	background-image: linear-gradient(to bottom, $dark-button-top-active-color, $dark-button-bottom-active-color);
 }
 
@@ -119,4 +119,30 @@ tbody {
 
 .minus-button-container {
 	margin-left: 5px;
+}
+
+.ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.no-ellipsis {
+	white-space: normal;
+	overflow: visible;
+	text-overflow: initial;
+}
+
+[data-tooltip] {
+	position: relative;
+	&:hover {
+		&::before {
+			content: attr(data-tooltip);
+			position: absolute;
+			bottom: 80%;
+			left: 0;
+			padding: .5em;
+			background-color: rgba(0, 0, 0, .6);
+		}
+	}
 }

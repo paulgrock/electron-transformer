@@ -2,6 +2,7 @@ import path from 'path';
 
 export const formatFileProperties = (file) => {
 	return {
+		id: path.join(file.path, file.name),
 		originalFileName: file.name,
 		path: file.path,
 		updatedFileName: file.name
