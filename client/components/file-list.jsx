@@ -15,7 +15,7 @@ const FileList = React.createClass({
 		const {handleAddFiles, handleSaveFiles, onSortFiles, onClearClick} = this.props;
 
 		const ListOfFiles = this.props.files.map((file) => {
-			return <File file={file} key={file.originalFileName} />;
+			return <File file={file} key={file.id} />;
 		});
 
 		return (

@@ -11,6 +11,7 @@ const renameFile = (file, transforms) => {
 		return transformList[transform.style].method(file, transform.args);
 	}, originalFileNameWithoutExt);
 	return {
+		id: path.join(file.path, file.originalFileName),
 		originalFileName: file.originalFileName,
 		path: file.path,
 		updatedFileName: `${transformedFileName}${extension}`

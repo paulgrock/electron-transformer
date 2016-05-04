@@ -29,6 +29,7 @@ describe('Rename file', () => {
 		];
 
 		const updatedFile = {
+			id: "~/docs/foo.js",
 			originalFileName: 'foo.js',
 			path: '~/docs/',
 			updatedFileName: 'FOO.js'
@@ -61,6 +62,7 @@ describe('Rename file', () => {
 		];
 
 		const updatedFile = {
+			id: "~/docs/foo.js",
 			originalFileName: 'foo.js',
 			path: '~/docs/',
 			updatedFileName: 'abcFOO.js'
