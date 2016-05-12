@@ -1,5 +1,4 @@
-import dialog from 'dialog';
-import app from 'app';
+import {dialog, app} from 'electron';
 
 const menuConstructor = (win) => {
 	const menu = [

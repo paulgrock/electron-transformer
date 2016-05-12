@@ -1,10 +1,8 @@
 'use strict';
 import React from 'react';
 import {connect} from 'react-redux';
-
-const ipc = window.require('electron').ipcRenderer;
-const remote = window.require('remote');
-const dialog = remote.require('dialog');
+const {remote, ipcRenderer: ipc} = window.require('electron');
+const {dialog} = remote;
 const recursive = remote.require('recursive-readdir');
 const fs = remote.require('fs');
 

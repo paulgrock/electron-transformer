@@ -1,11 +1,8 @@
 'use strict';
 
-import app from 'app';
-import BrowserWindow from 'browser-window';
-import {ipcMain as ipc} from 'electron';
+import {app, BrowserWindow, Menu, ipcMain: ipc} from 'electron';
 import fs from 'fs';
 import path from 'path';
-import Menu from 'menu';
 import menuConstructor from './menu';
 
 // report crashes to the Electron project

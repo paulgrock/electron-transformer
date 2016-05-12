@@ -1,5 +1,5 @@
-const remote = window.require('remote');
-const dialog = remote.require('dialog');
+const {remote} = window.require('electron');
+const {dialog} = remote;
 
 export default (files, cb) => {
 	const fileLength = files.length;
