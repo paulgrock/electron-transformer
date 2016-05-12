@@ -1,5 +1,4 @@
-import dialog from 'dialog';
-import app from 'app';
+import {dialog, app} from 'electron';
 
 const menuConstructor = (win) => {
 	const menu = [
@@ -123,6 +122,10 @@ const menuConstructor = (win) => {
 		{
 			label: 'Help',
 			role: 'help'
+		},
+		{
+			label: 'Windows',
+			role: 'window'
 		}
 	];
 
