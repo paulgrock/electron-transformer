@@ -122,6 +122,10 @@ const menuConstructor = (win) => {
 		{
 			label: 'Help',
 			role: 'help'
+		},
+		{
+			label: 'Windows',
+			role: 'window'
 		}
 	];
 

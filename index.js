@@ -1,6 +1,6 @@
 'use strict';
 
-import {app, BrowserWindow, Menu, ipcMain: ipc} from 'electron';
+import {app, BrowserWindow, Menu, ipcMain as ipc} from 'electron';
 import fs from 'fs';
 import path from 'path';
 import menuConstructor from './menu';
@@ -24,7 +24,7 @@ function createMainWindow() {
 	const win = new BrowserWindow({
 		width: 1200,
 		height: 800,
-		'title-bar-style': 'hidden',
+		titleBarStyle: 'hidden',
 		title: 'Transformer'
 	});
 
